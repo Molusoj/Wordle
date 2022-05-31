@@ -299,7 +299,7 @@ function update(){
             stopConfetti()
             displayScore();
             addMoreTries();
-            readTextFile("http://127.0.0.1:8887/sgb-words.txt")
+            readTextFile("sgb-words.txt")
             col = 0
             console.log(row)
             row += 1;
