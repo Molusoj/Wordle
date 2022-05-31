@@ -119,7 +119,11 @@ function initialize(){
             
             if(key == "Enter"){
                 keyTile.classList.add("enter-key-tile");
-            }else{
+            }
+            else if(key == "⌫"){
+                keyTile.classList.add("enter-key-tile");
+            }
+            else{
                 keyTile.classList.add("key-tile")
             }
             keyboardRow.appendChild(keyTile)
