@@ -148,7 +148,7 @@ html{
   background-color: #797979;
 }
 
-@media (max-width: 450px) and (min-height: 585px){
+@media (max-width: 450px) and (max-height: 585px){
   .keyboard-row{
     width: 370px;
     margin: 0 auto;
