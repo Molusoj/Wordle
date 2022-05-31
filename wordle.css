@@ -2,10 +2,18 @@ body{
   font-family: 'Sans-serif', 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS';
   text-align: center;
   background: #ffffff;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 hr{
   width: 500px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+html{
+  display: flex;
 }
 
 #title{
@@ -19,6 +27,7 @@ hr{
   flex-direction:column; 
   justify-content:center;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 #board{
@@ -31,6 +40,7 @@ hr{
   overflow-x: hidden;
   overflow-y: auto;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .keyboard-row{
