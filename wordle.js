@@ -30,7 +30,7 @@ const stopConfetti = () => {
 
 
 window.onload = function (){
-    readTextFile("http://127.0.0.1:8887/sgb-words.txt")
+    readTextFile("sgb-words.txt")
     initialize();
 }
 
