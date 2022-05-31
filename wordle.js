@@ -30,7 +30,7 @@ const stopConfetti = () => {
 
 
 window.onload = function (){
-    readTextFile("sgb-words.txt")
+    readTextFile("http://127.0.0.1:8887/sgb-words.txt")
     initialize();
 }
 
@@ -145,6 +145,7 @@ function processKey(){
         if(col < width){
             let currTile = document.getElementById(row.toString() + '-' + col.toString());
             anime({
+                endDelay: 50,
                 targets: currTile,
                 scale: 1.05,
                 borderColor: "#919191FF"
@@ -164,6 +165,7 @@ function processKey(){
         let currTile = document.getElementById(row.toString()+'-'+ col.toString());
         currTile.innerText = " ";
         anime({
+            endDelay: 50,
             targets: currTile,
             scale: 1,
             borderColor: "#D7D7D7FF",
@@ -224,6 +226,7 @@ function displayScore(){
 }
 
 function update(){
+    
     console.log("updating")
     let guess = "";
     document.getElementById("answer").innerText = "";
