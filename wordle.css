@@ -172,8 +172,8 @@ body {
   }
 
   #answer{
-    height: 20px;
-    font-size: medium;
+    width: auto;
+    height: auto;
   }
 
   .tile{
@@ -234,8 +234,8 @@ body {
   }
 
   #answer{
-    width: 100px;
-    height: 50px;
+    width: auto;
+    height: auto;
   }
   
   @media (max-width: 395px) {
