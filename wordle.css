@@ -63,6 +63,12 @@ body {
   justify-content: center;
 }
 
+#answer-container{
+  display: inline-block;
+  justify-self: center;
+  justify-content: center;
+}
+
 #answer{
   font-family: "Playfair Display script=latin rev=1";
   font-weight: bold;
