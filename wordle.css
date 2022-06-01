@@ -172,8 +172,9 @@ body {
   }
 
   #answer{
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: 5px;
+    font-size: medium;
   }
 
   .tile{
@@ -219,7 +220,7 @@ body {
   }
 
   #answer{
-    width: 300px;
+    width: 100%;
     height: 20px;
   }
 
