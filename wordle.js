@@ -174,8 +174,8 @@ function processKey(){
             scale: 1,
             borderColor: "#D7D7D7FF",
         })
-        if(document.getElementById("answer").innerText == "Word does not exist"){
-            document.getElementById("answer").innerText = " "
+        if(document.getElementById("answer").style.display == "block"){
+            document.getElementById("answer").style.display = "none"
         }
     }
     else if(e.code == "Enter"){
@@ -246,7 +246,7 @@ function update(){
     
     
     if(!guessList.includes(guess)){
-        document.getElementById("answer").innerText = "Word does not exist"
+        document.getElementById("answer").style.display = "block"
         return;
     }
     
