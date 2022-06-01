@@ -42,6 +42,20 @@ body {
   flex-wrap: wrap;
 }
 
+#overlay {
+  position: fixed; /* Sit on top of the page content */
+  display: block; /* Hidden by default */
+  height: 5%; /* Full height (cover the whole page) */
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  justify-self: center;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
+}
+
 #board{
   width: 100%;
   height: 370px;
@@ -63,15 +77,19 @@ body {
   justify-content: center;
 }
 
-#answer-container{
-  display: inline-block;
-  justify-self: center;
+#overlay{
   justify-content: center;
 }
 
 #answer{
   font-family: "Playfair Display script=latin rev=1";
   font-weight: bold;
+  color: white;
+  display: block;
+  justify-self: center;
+  height: 100%;
+  top: 5px;
+  margin: 0;
 }
 
 .result{

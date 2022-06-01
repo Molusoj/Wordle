@@ -174,8 +174,8 @@ function processKey(){
             scale: 1,
             borderColor: "#D7D7D7FF",
         })
-        if(document.getElementById("answer").style.display == "block"){
-            document.getElementById("answer").style.display = "none"
+        if(document.getElementById("answer").innerText == "Word does not exist"){
+            document.getElementById("answer").innerText = " "
         }
     }
     else if(e.code == "Enter"){
@@ -233,6 +233,7 @@ function update(){
     
     console.log("updating")
     let guess = "";
+    document.getElementById("answer").innerText = "";
     
     for(let c = 0; c < width; c++){
         let currTile = document.getElementById(row.toString() +'-' + (c).toString());
@@ -245,7 +246,7 @@ function update(){
     
     
     if(!guessList.includes(guess)){
-        document.getElementById("answer").style.display = "block"
+        document.getElementById("answer").innerText = "Word does not exist"
         return;
     }
     
