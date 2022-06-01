@@ -16,6 +16,17 @@ html{
   display: flex;
 }
 
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 #title{
   font-size: 35px;
   font-weight: bold;
@@ -143,308 +154,156 @@ html{
   background-color: #797979;
 }
 
-@media (max-width: 450px){
+@media (max-width: 450px) and (min-width: 390px) and (max-height: 650px){
   .keyboard-row{
     width: 350px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
   }
 
   .enter-key-tile{
     width: 50px;
     height: 50px;
-    margin: 2px;
-    border-radius: 5px;
     font-size: 15px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    background-color: #797979;
   }
 
   .key-tile{
     width: 30px;
     height: 50px;
-    margin: 2px;
-    border-radius: 5px;
     font-size: 15px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #d3d6da;
   }
 
   #answer{
-    width: 300px;
     height: 20px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    font-weight: bold;
     font-size: medium;
   }
 
   .tile{
-    /*Box*/
-    border: 2px solid rgb(215, 215, 215);
-    width: 40px;
-    height: 40px;
-    margin: 2.5px;
-
-    /*Text*/
-    color: black;
+    width: 30px;
+    height: 30px;
     font-size: 15px;
-    font-family: Sans-serif;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   #board{
-    width: 100%;
-    height: 300px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
-    overflow: scroll;
-    overflow-x: hidden;
-    overflow-y: auto;
-    justify-content: center;
+    height: 230px;
   }
 
   .result{
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 20px;
-    justify-content: center;
-    width: 100%;
-    top: 0;
-    left: 0;
   }
 
   #score{
-    font-family: "Playfair Display script=latin rev=1";
-    font-weight: bold;
     font-size: medium;
   }
 
   #tries{
-    font-family: "Playfair Display script=latin rev=1";
-    font-weight: bold;
     font-size: medium;
   }
 
   #title{
     font-size: large;
-    font-weight: bold;
-    font-family: "Times New Roman";
-    width: 100%;
-    margin: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
   }
-}
-
-@media (max-height: 575px) {
-  .keyboard-row{
-    width: 350px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .enter-key-tile{
-    width: 50px;
-    height: 55px;
-    margin: 2px;
-    border-radius: 5px;
-    font-size: medium;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    background-color: #797979;
-  }
-
-  .key-tile{
-    width: 30px;
-    height: 55px;
-    margin: 2px;
-    border-radius: 5px;
-    font-size: 15px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #d3d6da;
-  }
-
-  #answer{
-    width: 300px;
-    height: 20px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    font-weight: bold;
-    font-size: medium;
-  }
-
-  .tile{
-    /*Box*/
-    border: 2px solid rgb(215, 215, 215);
-    width: 35px;
-    height: 35px;
-    margin: 2.5px;
-
-    /*Text*/
-    font-size: 15px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #board{
-    width: 100%;
-    height: 270px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
-    overflow: scroll;
-    overflow-x: hidden;
-    overflow-y: auto;
-    justify-content: center;
-  }
-
-  #answer{
-    width: auto;
-    height: 10px;
-    margin: 10px auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    font-weight: bold;
-    font-size: medium;
-  }
-
-  html,
-  body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
 }
 
 @media (max-height: 1000px) and (min-height: 700px) {
   .keyboard-row{
     width: 400px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
   }
 
   .enter-key-tile{
     width: 55px;
     height: 60px;
-    margin: 2px;
-    border-radius: 5px;
-    font-size: medium;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    background-color: #797979;
   }
 
   .key-tile{
     width: 35px;
     height: 60px;
-    margin: 2px;
-    border-radius: 5px;
-    font-size: 15px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #d3d6da;
   }
 
   #answer{
     width: 300px;
     height: 20px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    font-weight: bold;
-    font-size: medium;
   }
 
   .tile{
-    /*Box*/
-    border: 2px solid rgb(215, 215, 215);
     width: 50px;
     height: 50px;
-    margin: 2.5px;
-
-    /*Text*/
-    font-size: 15px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   #board{
     width: 100%;
     height: 400px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
-    overflow: scroll;
-    overflow-x: hidden;
-    overflow-y: auto;
-    justify-content: center;
   }
 
   #answer{
     width: 100px;
     height: 50px;
-    margin: 10px auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    font-weight: bold;
-    font-size: medium;
   }
+  
+  @media (max-width: 395px) {
+    .keyboard-row{
+      width: 390px;
+    }
 
-  html,
-  body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
+    .enter-key-tile{
+      width: 52px;
+      height: 60px;
+    }
+
+    .key-tile{
+      width: 32px;
+      height: 60px;
+    }
+  }
+  
+  @media (max-height: 760px) {
+    .keyboard-row{
+      width: 390px;
+    }
+
+    .enter-key-tile{
+      width: 52px;
+      height: 60px;
+    }
+
+    .key-tile{
+      width: 32px;
+      height: 60px;
+    }
+
+    .tile{
+      /*Box*/
+      width: 40px;
+      height: 40px;
+    }
+
+    #board{
+      height: 300px;
+    }
+    
+    @media (max-width: 370px) {
+      .keyboard-row{
+        width: 370px;
+      }
+
+      .enter-key-tile{
+        width: 50px;
+        height: 60px;
+      }
+
+      .key-tile{
+        width: 30px;
+        height: 60px;
+      }
+
+      .tile{
+        /*Box*/
+        width: 40px;
+        height: 40px;
+      }
+
+      #board{
+        height: 300px;
+      }
+    }
   }
 
 }
