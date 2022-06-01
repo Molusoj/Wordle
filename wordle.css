@@ -66,6 +66,8 @@ body {
 #answer{
   font-family: "Playfair Display script=latin rev=1";
   font-weight: bold;
+  display: inline-flex;
+  justify-content: center;
 }
 
 .result{
