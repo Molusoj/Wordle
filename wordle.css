@@ -131,7 +131,7 @@ body {
   
   font-family: 'Times New Roman', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', 'Sans-serif';
   font-size: 20px;
-  font-weight: bold;
+  font-weight: lighter;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -224,11 +224,13 @@ body {
   .enter-key-tile{
     width: 55px;
     height: 60px;
+    font-size: 15px;
   }
 
   .key-tile{
     width: 35px;
     height: 60px;
+    font-size: 15px;
   }
 
   #answer{
