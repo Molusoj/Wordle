@@ -204,6 +204,18 @@ function offOverLay() {
         gameOver = true;
         triesText = document.getElementById("tries").innerText = "Tries: " + tries.toString();
         document.getElementById("answer").innerText = word;
+        let overlay = document.getElementById('overlay')
+        let ans = document.getElementById('answer')
+        var overLayAnim = anime({
+            targets: overlay,
+            easing: 'easeInOutQuad',
+            backgroundColor: "#000"
+        });
+        var overLayAnim = anime({
+            targets: ans,
+            easing: 'easeInOutQuad',
+            color: "rgb(255,255,255)"
+        });
     }
 }
 
