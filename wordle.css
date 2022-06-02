@@ -31,6 +31,7 @@ body {
 }
 
 #overlay {
+  text-align: center;
   position: fixed; /* Sit on top of the page content */
   display: block; /* Hidden by default */
   height: 5%; /* Full height (cover the whole page) */
@@ -39,7 +40,8 @@ body {
   right: 0;
   top: 0;
   justify-self: center;
-  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0); /* Black background with opacity */
   z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
   cursor: pointer; /* Add a pointer on hover */
 }
@@ -73,18 +75,13 @@ body {
   position: fixed;
 }
 
-#overlay{
-  justify-content: center;
-}
-
 #answer{
   font-family: "Playfair Display script=latin rev=1";
   font-weight: bold;
-  color: white;
-  display: flex;
+  color: rgba(255, 255, 255, 0);
   justify-self: center;
   height: 100%;
-  top: 5px;
+  top: 20px;
   margin: 0;
 }
 
@@ -203,7 +200,7 @@ body {
   }
 
   #answer{
-    font-size: x-large;
+    
   }
 
   #score{
@@ -236,7 +233,8 @@ body {
 
   #answer{
     width: 100%;
-    height: 20px;
+    height: 50px;
+    font-size: x-large;
   }
 
   .tile{
@@ -247,11 +245,6 @@ body {
   #board{
     width: 100%;
     height: 400px;
-  }
-
-  #answer{
-    width: auto;
-    height: auto;
   }
   
   @media (max-width: 395px) {

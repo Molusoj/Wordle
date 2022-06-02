@@ -141,6 +141,14 @@ function processKey(){
     processInput(e);
 }
 
+function onOverlay() {
+    document.getElementById("overlay").style.display = "block";
+}
+
+function offOverLay() {
+    document.getElementById("overlay").style.display = "none";
+}
+
  function processInput(e){
     if(gameOver) return;
     
@@ -176,6 +184,13 @@ function processKey(){
         })
         if(document.getElementById("answer").innerText == "Word does not exist"){
             document.getElementById("answer").innerText = " "
+            let overlay = document.getElementById('overlay')
+            let ans = document.getElementById('answer')
+            var overLayAnim = anime({
+                targets: overlay, ans,
+                easing: 'easeInOutQuad',
+                backgroundColor: "rgba(255,255,255,0)"
+            });
         }
     }
     else if(e.code == "Enter"){
@@ -247,6 +262,18 @@ function update(){
     
     if(!guessList.includes(guess)){
         document.getElementById("answer").innerText = "Word does not exist"
+        let overlay = document.getElementById('overlay')
+        let ans = document.getElementById('answer')
+        var overLayAnim = anime({
+            targets: overlay,
+            easing: 'easeInOutQuad',
+            backgroundColor: "#000"
+        });
+        var overLayAnim = anime({
+            targets: ans,
+            easing: 'easeInOutQuad',
+            color: "rgb(255,255,255)"
+        });
         return;
     }
     
