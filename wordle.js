@@ -127,7 +127,8 @@ function initialize(){
             }
             keyboardRow.appendChild(keyTile)
         }
-        document.body.appendChild(keyboardRow);
+        //document.body.appendChild(keyboardRow);
+        document.getElementById("keyboardParent").appendChild(keyboardRow)
     }
     document.addEventListener("keydown", (e ) => {
         processInput(e);
