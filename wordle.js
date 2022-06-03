@@ -219,6 +219,34 @@ function offOverLay() {
     }
 }
 
+function cleanKey(){
+    for (let i = 0; i<keyboard.length; i++){
+        let currRow = keyboard[i];
+
+        for (let j=0; j < currRow.length; j++){
+            let key = currRow[j];
+            if(key == "Enter"){
+                
+            }else if(key == "⌫"){
+                
+            }else if("A" <= key && key <= "Z"){
+                let keyID = "Key"+key;
+                document.getElementById(keyID).classList.remove("correct");
+                document.getElementById(keyID).classList.remove("present");
+                document.getElementById(keyID).classList.remove("absent");
+                let mKey = document.getElementById(keyID)
+                anime({
+                    endDelay: 1000,
+                    easing: 'easeInOutQuad',
+                    targets: mKey,
+                    backgroundColor: "#d3d6da",
+                    color: "#000000",
+                })
+            }
+        }
+    }
+}
+
 function  reverseString(str) {
     return str.split("").reverse().join("");
 }
@@ -349,16 +377,7 @@ function update(){
             console.log(row)
             tries = 1;
             triesText = document.getElementById("tries").innerText = "Tries: " + tries.toString();
-            for (let i = 0; i<keyboard.length; i++){
-                let currRow = keyboard[i];
-                for (let j=0; j < currRow.length; j++){
-                    if("Key"+currRow[j] != "KeyEnter"){
-                        if("Key"+currRow[j] != "Key⌫"){
-                            document.getElementById(("Key"+currRow[j])).classList.add('key-tile');
-                        }
-                    }
-                }
-            }
+            cleanKey();
             return;
         }
     }
