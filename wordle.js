@@ -160,13 +160,13 @@ function offOverLay() {
                 endDelay: 50,
                 targets: currTile,
                 scale: 1.05,
-                borderColor: "#919191FF"
             })
             if(currTile.innerText == ""){
                 console.log(e.code[3])
                 currTile.innerText = e.code[3];
                 col+=1
             }
+            currTile.style.borderColor = "#D7D7D7FF"
         }
     }
     else if(e.code == "Backspace"){
@@ -180,8 +180,9 @@ function offOverLay() {
             endDelay: 50,
             targets: currTile,
             scale: 1,
-            borderColor: "#D7D7D7FF",
         })
+        currTile.style.borderColor = "#919191FF"
+        
         if(document.getElementById("answer").innerText == "Word does not exist"){
             document.getElementById("answer").innerText = " "
             let overlay = document.getElementById('overlay')
@@ -189,7 +190,7 @@ function offOverLay() {
             var overLayAnim = anime({
                 targets: overlay, ans,
                 easing: 'easeInOutQuad',
-                backgroundColor: "rgba(255,255,255,0)"
+                backgroundColor: "rgba(255, 255, 255, 0)"
             });
         }
     }
@@ -307,12 +308,12 @@ function update(){
         var overLayAnim = anime({
             targets: overlay,
             easing: 'easeInOutQuad',
-            backgroundColor: "#000"
+            backgroundColor: "rgb(255,255,255)"
         });
         var overLayAnim = anime({
             targets: ans,
             easing: 'easeInOutQuad',
-            color: "rgb(255,255,255)"
+            color: "rgb(0,0,0)"
         });
         return;
     }
@@ -347,18 +348,18 @@ function update(){
                 endDelay: 1000,
                 easing: 'easeInOutQuad',
                 targets: currTile,
-                backgroundColor: "#6aaa64",
+                backgroundColor: "#333399",
                 color: "#ffffff",
-                borderColor: "#6aaa64"
+                borderColor: "#333399"
             })
 
             anime({
                 endDelay: 1000,
                 easing: 'easeInOutQuad',
                 targets: keyTile,
-                backgroundColor: "#6aaa64",
+                backgroundColor: "#333399",
                 color: "#ffffff",
-                borderColor: "#6aaa64"
+                borderColor: "#333399"
             })
         }
         console.log("width " + width);
@@ -398,9 +399,9 @@ function update(){
                         endDelay: 1000,
                         easing: 'easeInOutQuad',
                         targets: keyTile,
-                        backgroundColor: "#c9b458",
+                        backgroundColor: "#99ccff",
                         color: "#ffffff",
-                        borderColor: "#c9b458"
+                        borderColor: "#99ccff"
                     })
                 }
                 
@@ -410,9 +411,9 @@ function update(){
                     endDelay: 1000,
                     easing: 'easeInOutQuad',
                     targets: currTile,
-                    backgroundColor: "#c9b458",
+                    backgroundColor: "#99ccff",
                     color: "#ffffff",
-                    borderColor: "#c9b458"
+                    borderColor: "#99ccff"
                 })
                 
             }

@@ -7,7 +7,6 @@ hr{
 
 body {
   width: 100%;
-  
   margin: 0 !important;
   padding: 0 !important;
   overflow: hidden;
@@ -16,7 +15,7 @@ body {
   bottom: 0;
   font-family: 'Sans-serif', 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS';
   text-align: center;
-  background: #ffffff;
+  background: #000000;
   display: flex;
   flex-wrap: wrap;
   justify-content:center;
@@ -41,7 +40,7 @@ body {
   top: 0;
   justify-self: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0); /* Black background with opacity */
+  background-color: #000000; /* Black background with opacity */
   z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
   cursor: pointer; /* Add a pointer on hover */
 }
@@ -78,7 +77,7 @@ body {
 #answer{
   font-family: "Playfair Display script=latin rev=1";
   font-weight: bold;
-  color: rgba(255, 255, 255, 0);
+  color: #000000;
   justify-self: center;
   height: 100%;
   top: 20px;
@@ -96,6 +95,7 @@ body {
   font-family: "Playfair Display script=latin rev=1";
   font-weight: bold;
   float:right;
+  color: white;
   margin-left:25px;
 }
 
@@ -103,18 +103,19 @@ body {
   font-family: "Playfair Display script=latin rev=1";
   font-weight: bold;
   float:left;
+  color: #ffffff;
   margin-right:25px;
 }
 
 .tile{
   /*Box*/
-  border: 2px solid rgb(215, 215, 215);
+  border: 2px solid rgb(145, 145, 145);
   width: 50px;
   height: 50px;
   margin: 2.5px;
 
   /*Text*/
-  color: black;
+  color: #ffffff;
   font-size: 25px;
   font-family: Sans-serif;
   font-weight: bold;
