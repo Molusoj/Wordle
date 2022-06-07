@@ -100,7 +100,7 @@ body {
   margin-left:25px;
 }
 
-#tries{
+#lives{
   font-family: "Playfair Display script=latin rev=1";
   font-weight: bold;
   float:left;
@@ -209,7 +209,7 @@ body {
     font-size: medium;
   }
 
-  #tries{
+  #lives{
     font-size: medium;
   }
 

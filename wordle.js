@@ -8,9 +8,10 @@ var col = 0;
 
 var gameOver = false;
 
-var triesText;
+var livesText;
 var scoreText;
 
+var lives = 6;
 var tries = 1;
 var score = 0;
 
@@ -25,7 +26,16 @@ const startConfetti = () => {
 const stopConfetti = () => {
     setTimeout(function() {
         confetti.stop()
-    }, 5000); // 5000 is time that after 5 second stop the confetti ( 5000 = 5 sec)
+
+        document.getElementById("answer").innerText = " "
+        let overlay = document.getElementById('overlay')
+        let ans = document.getElementById('answer')
+        var overLayAnim = anime({
+            targets: overlay, ans,
+            easing: 'easeInOutQuad',
+            backgroundColor: "rgba(255, 255, 255, 0)"
+        });
+    }, 3000); // 5000 is time that after 5 second stop the confetti ( 5000 = 5 sec)
 };
 
 
@@ -67,7 +77,7 @@ function readTextFile(file)
 
 function addMoreTries(){
     console.log("row " + row)
-    for (let r = height; r < height + 3; r++){
+    for (let r = height; r < height + 5; r++){
         for (let c = 0; c < width; c++){
             let tile = document.createElement("span")
             tile.id = r.toString() + "-" + c.toString()
@@ -76,7 +86,11 @@ function addMoreTries(){
             document.getElementById("board").appendChild(tile)
         }
     }
-    height = height + 3;
+    height = height + 5;
+
+    livesText = document.getElementById("lives").innerText = "Lives: " + (--lives).toString();
+    lives = lives +5;
+    livesText = document.getElementById("lives").innerText = "Lives: " + (lives).toString();
 }
 
 let keyboard =
@@ -203,19 +217,19 @@ function offOverLay() {
     
     if(!gameOver && row==height){
         gameOver = true;
-        triesText = document.getElementById("tries").innerText = "Tries: " + tries.toString();
+        livesText = document.getElementById("lives").innerText = "Lives: " + lives.toString();
         document.getElementById("answer").innerText = word;
         let overlay = document.getElementById('overlay')
         let ans = document.getElementById('answer')
         var overLayAnim = anime({
             targets: overlay,
             easing: 'easeInOutQuad',
-            backgroundColor: "#000"
+            backgroundColor: "#ffffff"
         });
         var overLayAnim = anime({
             targets: ans,
             easing: 'easeInOutQuad',
-            color: "rgb(255,255,255)"
+            color: "rgb(0,0,0)"
         });
     }
 }
@@ -285,6 +299,58 @@ function displayScore(){
     }
 }
 
+const clearUsedTiles = () => {
+    setTimeout(function() {
+        let translate = 500;
+
+        let absentClass = document.querySelectorAll(".absent")
+        let presentClass = document.querySelectorAll(".present")
+        let correctClass = document.querySelectorAll(".correct")
+
+        correctClass.forEach(c => {
+            let getClassID = document.getElementById(c.id)
+            var hideAnim = anime({
+                targets: getClassID,
+                scale: 2,
+                translateX: translate,
+                easing: 'easeInOutSine',
+                complete: function (anim){
+                    console.log("done")
+                    c.remove();
+                }
+            })
+        })
+
+        presentClass.forEach(c => {
+            let getClassID = document.getElementById(c.id)
+            var hideAnim = anime({
+                targets: getClassID,
+                scale: 2,
+                translateX: translate,
+                easing: 'easeInOutSine',
+                complete: function (anim){
+                    console.log("done")
+                    c.remove();
+                }
+            })
+        })
+
+        absentClass.forEach(c => {
+            let getClassID = document.getElementById(c.id)
+            var hideAnim = anime({
+                targets: getClassID,
+                scale: 2,
+                translateX: translate,
+                easing: 'easeInOutSine',
+                complete: function (anim){
+                    console.log("done")
+                    c.remove();
+                }
+            })
+        })
+    }, 2500);
+};
+
 function update(){
     
     console.log("updating")
@@ -299,8 +365,7 @@ function update(){
     }
     guess = guess.toLowerCase();
     console.log(guess);
-    
-    
+
     if(!guessList.includes(guess)){
         document.getElementById("answer").innerText = "Word does not exist"
         let overlay = document.getElementById('overlay')
@@ -366,19 +431,29 @@ function update(){
         console.log("correct " + correct)
         
         if(correct == width){
-            console.log("game over")
+            document.getElementById("answer").innerText = word
+            let overlay = document.getElementById('overlay')
+            let ans = document.getElementById('answer')
+            var overLayAnim = anime({
+                targets: overlay,
+                easing: 'easeInOutQuad',
+                backgroundColor: "rgb(255,255,255)"
+            });
+            var overLayAnim = anime({
+                targets: ans,
+                easing: 'easeInOutQuad',
+                color: "#FFD700"
+            });
+            
             startConfetti()
             stopConfetti()
             displayScore();
             addMoreTries();
             readTextFile("sgb-words.txt")
             col = 0
-            console.log(row)
             row += 1;
-            console.log(row)
-            tries = 1;
-            triesText = document.getElementById("tries").innerText = "Tries: " + tries.toString();
             cleanKey();
+            clearUsedTiles();
             return;
         }
     }
@@ -443,10 +518,9 @@ function update(){
         }
     }
     
-    triesText = document.getElementById("tries").innerText = "Tries: " + tries.toString();
+    livesText = document.getElementById("lives").innerText = "Lives: " + (--lives).toString();
     
+    tries += 1;
     row += 1;
     col = 0
-    
-    tries = tries + 1;
 }
