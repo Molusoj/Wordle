@@ -31,10 +31,16 @@ const stopConfetti = () => {
         let overlay = document.getElementById('overlay')
         let ans = document.getElementById('answer')
         var overLayAnim = anime({
-            targets: overlay, ans,
+            targets: overlay,
             easing: 'easeInOutQuad',
-            backgroundColor: "rgba(255, 255, 255, 0)"
+            backgroundColor: "rgba(255, 255, 255, 0)",
+            complete:function (){
+                ans.style.color = "#000"
+                ans.innerText = "";
+                ans.style.textShadow = "0px 0px 0px black"
+            }
         });
+        
     }, 3000); // 5000 is time that after 5 second stop the confetti ( 5000 = 5 sec)
 };
 
@@ -229,7 +235,8 @@ function offOverLay() {
         var overLayAnim = anime({
             targets: ans,
             easing: 'easeInOutQuad',
-            color: "rgb(0,0,0)"
+            color: "#FFD700",
+            textShadow: "1px 1px 2px black"
         });
     }
 }
@@ -378,7 +385,7 @@ function update(){
         var overLayAnim = anime({
             targets: ans,
             easing: 'easeInOutQuad',
-            color: "rgb(0,0,0)"
+            color: "rgb(0,0,0)",
         });
         return;
     }
@@ -442,7 +449,8 @@ function update(){
             var overLayAnim = anime({
                 targets: ans,
                 easing: 'easeInOutQuad',
-                color: "#FFD700"
+                color: "#FFD700",
+                textShadow: "1px 1px 2px black"
             });
             
             startConfetti()
