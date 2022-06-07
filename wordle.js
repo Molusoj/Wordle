@@ -18,6 +18,7 @@ var score = 0;
 const startConfetti = () => {
     setTimeout(function() {
         confetti.start()
+        confetti.speed = 10;
     }, 200); // 1000 is time that after 1 second start the confetti ( 1000 = 1 sec)
 };
 
@@ -93,7 +94,6 @@ function addMoreTries(){
         }
     }
     height = height + 5;
-
     livesText = document.getElementById("lives").innerText = "Lives: " + (--lives).toString();
     lives = lives +5;
     livesText = document.getElementById("lives").innerText = "Lives: " + (lives).toString();
@@ -302,6 +302,9 @@ function displayScore(){
             scoreText.innerText = "Score: " + score + "pts";
             break;    
         default:
+            score = score + 10;
+            scoreText.innerText = "Score: " + score + "pts";
+            break;
         // code block
     }
 }
@@ -460,6 +463,7 @@ function update(){
             readTextFile("sgb-words.txt")
             col = 0
             row += 1;
+            tries = 1;
             cleanKey();
             clearUsedTiles();
             return;
