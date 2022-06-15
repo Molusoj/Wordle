@@ -463,7 +463,7 @@ function update(){
             readTextFile("sgb-words.txt")
             col = 0
             row += 1;
-            tries += 1;
+            tries = 1;
             cleanKey();
             clearUsedTiles();
             return;
