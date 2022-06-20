@@ -38,7 +38,6 @@ const stopConfetti = () => {
             complete:function (){
                 ans.style.color = "#000"
                 ans.innerText = "";
-                ans.style.textShadow = "0px 0px 0px black"
             }
         });
         
@@ -147,7 +146,6 @@ function initialize(){
             }
             keyboardRow.appendChild(keyTile)
         }
-        //document.body.appendChild(keyboardRow);
         document.getElementById("keyboardParent").appendChild(keyboardRow)
     }
     document.addEventListener("keydown", (e ) => {
@@ -236,7 +234,6 @@ function offOverLay() {
             targets: ans,
             easing: 'easeInOutQuad',
             color: "#FFD700",
-            textShadow: "1px 1px 2px black"
         });
     }
 }
@@ -453,7 +450,6 @@ function update(){
                 targets: ans,
                 easing: 'easeInOutQuad',
                 color: "#FFD700",
-                textShadow: "1px 1px 2px black"
             });
             
             startConfetti()
