@@ -441,6 +441,7 @@ function update(){
             document.getElementById("answer").innerText = word
             let overlay = document.getElementById('overlay')
             let ans = document.getElementById('answer')
+            
             var overLayAnim = anime({
                 targets: overlay,
                 easing: 'easeInOutQuad',

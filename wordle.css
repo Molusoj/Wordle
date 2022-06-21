@@ -79,7 +79,7 @@ body {
   font-weight: bold;
   color: #000000;
   justify-self: center;
-  -webkit-text-stroke: 1px #000000;
+  -webkit-text-stroke: 0.5px #000000;
   height: 50%;
   top: 20px;
   margin: 0;
