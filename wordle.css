@@ -87,6 +87,7 @@ body {
   overflow-y: auto;
   justify-content: center;
   flex-wrap: wrap;
+  z-index: -1;
 }
 
 .keyboard-row{
@@ -133,6 +134,10 @@ body {
   color: #ffffff;
 }
 
+#AnswerTxt{
+  z-index: 5;
+}
+
 #Answer{
   opacity: 0;
   background-color: aliceblue;
@@ -146,8 +151,8 @@ body {
   margin-top: 40px;
   padding-left: 10px;
   padding-right: 10px;
-  z-index: 5;
   font-family: 'Roboto', Sans-serif;
+  z-index: 5;
 }
 
 .sample-tile{
@@ -311,6 +316,7 @@ tbody {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: -1;
 }
 
 .key-tile{
