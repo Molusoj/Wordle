@@ -413,7 +413,7 @@ function screenShot(){
             targets: GameOverBoard,
             easing: 'linear',
             opacity: 1,
-            translateY: 180,
+            translateY: 100,
             duration: 1000
         })
     }
