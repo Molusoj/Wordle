@@ -8,12 +8,72 @@ var col = 0;
 
 var gameOver = false;
 
+var lives = 6;
+var _tries = 1;
+var totalScore = 0;
+var scorePerGame
+var numOfPlays = 0;
+var highScore = 0;
+
+var canPlay = false;
+
+var answer;
+
+var GameOverTable;
+var CompletedWordleTxt;
 var livesText;
 var scoreText;
+var highestScoreTxt;
+var GameOverBoard;
 
-var lives = 6;
-var tries = 1;
-var score = 0;
+function share() {
+    
+    var textToSend = 'Hey fren, check out my score in'
+    
+    GameOverBoard.style.boxShadow = 'none'
+    // iife here
+    ;(async () => {
+        if (!('share' in navigator)) {
+            return
+        }
+        // `element` is the HTML element you want to share.
+        // `backgroundColor` is the desired background color.
+        const canvas = await html2canvas(document.getElementById("Game-over",
+            {
+                windowWidth: document.documentElement.offsetWidth,
+                windowHeight: document.documentElement.offsetHeight,
+                allowTaint: true,
+                scrollX: 0,scrollY: 0,
+                scrollbars: false,
+                margin: 1,
+                image: {type: 'jpeg', quality: 1},
+                html2canvas: {scale: 2, logging: true},
+            })).then(canvas => {
+            canvas.toBlob(async (blob) => {
+                // Even if you want to share just one file you need to
+                // send them as an array of files.
+                const files = [new File([blob], 'image.png', { type: blob.type })]
+                const shareData = {
+                    url: "https://afamuefuna.github.io/Wordle/Index.html",
+                    text: "Click the link below to play",
+                    title: 'Join me in Wordle Grand Prix',
+                    files,
+                }
+                if (navigator.canShare(shareData)) {
+                    try {
+                        await navigator.share(shareData)
+                    } catch (err) {
+                        if (err.name !== 'AbortError') {
+                            console.error(err.name, err.message)
+                        }
+                    }
+                } else {
+                    console.warn('Sharing not supported', shareData)
+                }
+            })
+        });
+    })()
+}
 
 const startConfetti = () => {
     setTimeout(function() {
@@ -28,26 +88,108 @@ const stopConfetti = () => {
     setTimeout(function() {
         confetti.stop()
 
-        document.getElementById("answer").innerText = " "
+        answer.innerText = " "
         let overlay = document.getElementById('overlay')
-        let ans = document.getElementById('answer')
-        var overLayAnim = anime({
-            targets: overlay,
-            easing: 'easeInOutQuad',
-            backgroundColor: "rgba(255, 255, 255, 0)",
-            complete:function (){
-                ans.style.color = "#000"
-                ans.innerText = "";
-            }
-        });
+        answer.style.opacity = '0'
         
     }, 3000); // 5000 is time that after 5 second stop the confetti ( 5000 = 5 sec)
 };
 
+function revealGridSampleResult(target, color){
+    anime({
+        endDelay: 1000,
+        easing: 'easeInOutQuad',
+        targets: target,
+        backgroundColor: color,
+        color: "#ffffff",
+        borderColor: color
+    })
+}
+
+function clearInstruction(center_overlay, BG_overlay){
+    anime({
+        targets: center_overlay,
+        easing: 'linear',
+        opacity: 0,
+        translateY: 0,
+        complete:function () {
+            BG_overlay.style.opacity = "0"
+        }
+    })
+    canPlay = true;
+    center_overlay.style.zIndex = '0'
+    BG_overlay.style.zIndex = '0'
+    GameOverBoard.style.zIndex = '0'
+}
+
+var resultDetail = {
+    'word':"",
+    'score':"",
+    'tries':""
+}
+
+var resultDetailList = [resultDetail]
 
 window.onload = function (){
     readTextFile("sgb-words.txt")
     initialize();
+
+    CompletedWordleTxt = document.getElementById('Completed-wordle');
+    highestScoreTxt = document.getElementById('Highest-score')
+    GameOverTable = document.getElementById('Game-over-table')
+    GameOverBoard = document.getElementById('Game-over')
+    let center_overlay = document.getElementById('Center-overlay');
+    let BG_overlay = document.getElementById('BG-overlay');
+    let sample_present = document.getElementById('sample-tile-present')
+    let sample_wrong = document.getElementById('sample-tile-absent')
+    let sample_correct = document.getElementById('sample-tile-correct')
+    answer = document.getElementById('Answer');
+    
+    anime({
+        targets: center_overlay,
+        easing: 'linear',
+        opacity: 1,
+        translateY: 20,
+        duration: 1000,
+        complete:function () {
+            revealGridSampleResult(sample_wrong, "#787c7e")
+            revealGridSampleResult(sample_present, "#99ccff")
+            revealGridSampleResult(sample_correct, "#333399")
+            BG_overlay.style.opacity = "1"
+        }
+    })
+
+    document.getElementById('BG-overlay').onclick = function() {
+        clearInstruction(center_overlay, BG_overlay)
+    }
+    document.getElementById('Center-overlay').onclick = function () {
+        clearInstruction(center_overlay, BG_overlay)
+    }
+
+    document.getElementById('Share').onclick = function () {
+        share()
+    }
+}
+
+function updateTable(){
+    for (let i = numOfPlays; i <= resultDetailList.length -1; i++){
+        var newTable = document.createElement('tr')
+        newTable.setAttribute('class', 'row-' + i)
+
+        var td = document.createElement('td');
+        var td1 = document.createElement('td');
+        var td2 = document.createElement('td');
+
+        td.textContent = resultDetailList[i].word;
+        td1.textContent = resultDetailList[i].tries;
+        td2.textContent = resultDetailList[i].score;
+        
+        newTable.appendChild(td);
+        newTable.appendChild(td1);
+        newTable.appendChild(td2);
+
+        GameOverTable.appendChild(newTable);
+    }
 }
 
 const logFileText = async file => {
@@ -93,9 +235,9 @@ function addMoreTries(){
         }
     }
     height = height + 5;
-    livesText = document.getElementById("lives").innerText = "Lives: " + (--lives).toString();
+    livesText = document.getElementById("lives").innerText = "Tries: " + (--lives).toString();
     lives = lives +5;
-    livesText = document.getElementById("lives").innerText = "Lives: " + (lives).toString();
+    livesText = document.getElementById("lives").innerText = "Tries: " + (lives).toString();
 }
 
 let keyboard =
@@ -154,6 +296,9 @@ function initialize(){
 }
 
 function processKey(){
+    if(!canPlay){
+        return;
+    }
     console.log("clicked")
     e = {"code" : this.id};
     processInput(e);
@@ -167,7 +312,48 @@ function offOverLay() {
     document.getElementById("overlay").style.display = "none";
 }
 
+function answerShake(){
+    answer.style.opacity = '1'
+    const xMax = 16;
+    var answerReveal = anime({
+        targets: answer,
+        easing: 'easeInOutSine',
+        duration: 550,
+        translateX: [
+            {
+                value: xMax * -1,
+            },
+            {
+                value: xMax,
+            },
+            {
+                value: xMax/-2,
+            },
+            {
+                value: xMax/2,
+            },
+            {
+                value: 0
+            }
+        ],
+        complete: function () {
+            var answerClose = anime({
+                targets: answer,
+                easing: 'easeInOutSine',
+                opacity: '0'
+            });
+        }
+    });
+}
+
+function screenShot(){
+    
+}
+
  function processInput(e){
+     if(!canPlay){
+         return;
+     }
     if(gameOver) return;
     
     if("KeyA" <= e.code && e.code <= "KeyZ"){
@@ -201,15 +387,9 @@ function offOverLay() {
         })
         currTile.style.borderColor = "#919191FF"
         
-        if(document.getElementById("answer").innerText == "Word does not exist"){
-            document.getElementById("answer").innerText = " "
-            let overlay = document.getElementById('overlay')
-            let ans = document.getElementById('answer')
-            var overLayAnim = anime({
-                targets: overlay, ans,
-                easing: 'easeInOutQuad',
-                backgroundColor: "rgba(255, 255, 255, 0)"
-            });
+        if(answer.innerText == "Word does not exist"){
+            answer.innerText = " "
+            answer.style.opacity = '0'
         }
     }
     else if(e.code == "Enter"){
@@ -221,20 +401,21 @@ function offOverLay() {
     
     if(!gameOver && row==height){
         gameOver = true;
+        GameOverBoard.style.zIndex = '2'
+
         livesText = document.getElementById("lives").innerText = "Lives: " + lives.toString();
-        document.getElementById("answer").innerText = word;
+        answer.innerText = word;
         let overlay = document.getElementById('overlay')
-        let ans = document.getElementById('answer')
-        var overLayAnim = anime({
-            targets: overlay,
-            easing: 'easeInOutQuad',
-            backgroundColor: "#ffffff"
-        });
-        var overLayAnim = anime({
-            targets: ans,
-            easing: 'easeInOutQuad',
-            color: "#FFD700",
-        });
+        answer.style.opacity = "1";
+        answer.style.color = "#FFD700"
+
+        anime({
+            targets: GameOverBoard,
+            easing: 'linear',
+            opacity: 1,
+            translateY: 180,
+            duration: 1000
+        })
     }
 }
 
@@ -270,40 +451,57 @@ function  reverseString(str) {
     return str.split("").reverse().join("");
 }
 
-function displayScore(){
+function updateScore(){
     scoreText = document.getElementById("score");
     
-    switch(tries) {
+    switch(_tries) {
         case 1:
-            score = score + 100;
-            scoreText.innerText = "Score: " + score + "pts";
+            scorePerGame = 100;
+            totalScore = totalScore + 100;
+            scoreText.innerText = "Score: " + totalScore + "pts";
             break;
         case 2:
-            score = score + 70;
-            scoreText.innerText = "Score: " + score + "pts";
+            scorePerGame = 70;
+            totalScore = totalScore + 70;
+            scoreText.innerText = "Score: " + totalScore + "pts";
             break;
         case 3:
-            score = score + 50;
-            scoreText.innerText = "Score: " + score + "pts";
+            scorePerGame = 50;
+            totalScore = totalScore + 50;
+            scoreText.innerText = "Score: " + totalScore + "pts";
             break;
         case 4:
-            score = score + 40;
-            scoreText.innerText = "Score: " + score + "pts";
+            scorePerGame = 40;
+            totalScore = totalScore + 40;
+            scoreText.innerText = "Score: " + totalScore + "pts";
             break;
         case 5:
-            score = score + 30;
-            scoreText.innerText = "Score: " + score + "pts";
+            scorePerGame = 30;
+            totalScore = totalScore + 30;
+            scoreText.innerText = "Score: " + totalScore + "pts";
             break;
         case 6:
-            score = score + 10;
-            scoreText.innerText = "Score: " + score + "pts";
+            scorePerGame = 30;
+            totalScore = totalScore + 10;
+            scoreText.innerText = "Score: " + totalScore + "pts";
             break;    
         default:
-            score = score + 10;
-            scoreText.innerText = "Score: " + score + "pts";
+            scorePerGame = 30;
+            totalScore = totalScore + 10;
+            scoreText.innerText = "Score: " + totalScore + "pts";
             break;
         // code block
     }
+    
+    if(scorePerGame > highScore){
+        highScore = scorePerGame;
+    }
+
+    resultDetailList.push(resultDetail = {
+        word: word,
+        tries: _tries,
+        score: scorePerGame,
+    })
 }
 
 const clearUsedTiles = () => {
@@ -362,7 +560,7 @@ function update(){
     
     console.log("updating")
     let guess = "";
-    document.getElementById("answer").innerText = "";
+    answer.innerText = "";
     
     for(let c = 0; c < width; c++){
         let currTile = document.getElementById(row.toString() +'-' + (c).toString());
@@ -374,19 +572,10 @@ function update(){
     console.log(guess);
 
     if(!guessList.includes(guess)){
-        document.getElementById("answer").innerText = "Word does not exist"
-        let overlay = document.getElementById('overlay')
-        let ans = document.getElementById('answer')
-        var overLayAnim = anime({
-            targets: overlay,
-            easing: 'easeInOutQuad',
-            backgroundColor: "rgb(255,255,255)"
-        });
-        var overLayAnim = anime({
-            targets: ans,
-            easing: 'easeInOutQuad',
-            color: "rgb(0,0,0)",
-        });
+        answer.innerText = "Word does not exist"
+        answer.style.opacity = "1";
+        answer.style.color = "#000000"
+        answerShake()
         return;
     }
     
@@ -416,51 +605,32 @@ function update(){
             correct+=1;
             letterCount[letter] -= 1;
 
-            anime({
-                endDelay: 1000,
-                easing: 'easeInOutQuad',
-                targets: currTile,
-                backgroundColor: "#333399",
-                color: "#ffffff",
-                borderColor: "#333399"
-            })
-
-            anime({
-                endDelay: 1000,
-                easing: 'easeInOutQuad',
-                targets: keyTile,
-                backgroundColor: "#333399",
-                color: "#ffffff",
-                borderColor: "#333399"
-            })
+            revealGridSampleResult(keyTile, "#333399")
+            revealGridSampleResult(currTile, "#333399")
         }
         console.log("width " + width);
         console.log("correct " + correct)
         
         if(correct == width){
-            document.getElementById("answer").innerText = word
-            let overlay = document.getElementById('overlay')
-            let ans = document.getElementById('answer')
-            
-            var overLayAnim = anime({
-                targets: overlay,
-                easing: 'easeInOutQuad',
-                backgroundColor: "rgb(255,255,255)"
-            });
-            var overLayAnim = anime({
-                targets: ans,
-                easing: 'easeInOutQuad',
-                color: "#FFD700",
-            });
+            answer.style.opacity = '1';
+            answer.style.color = "#FFD700";
+            answer.innerText = word;
+
+            updateScore();
+            numOfPlays += 1;
+            updateTable()
+            CompletedWordleTxt.innerText = numOfPlays;
+            highestScoreTxt.innerText = highScore;
+
+            console.log("Score: " + totalScore)
             
             startConfetti()
             stopConfetti()
-            displayScore();
             addMoreTries();
             readTextFile("sgb-words.txt")
             col = 0
             row += 1;
-            tries = 1;
+            _tries = 1;
             cleanKey();
             clearUsedTiles();
             return;
@@ -479,57 +649,25 @@ function update(){
                 
                 let keyTile = document.getElementById("Key"+letter);
                 if(!keyTile.classList.contains("correct")){
-                    anime({
-                        endDelay: 1000,
-                        easing: 'easeInOutQuad',
-                        targets: keyTile,
-                        backgroundColor: "#99ccff",
-                        color: "#ffffff",
-                        borderColor: "#99ccff"
-                    })
                 }
-                
+                revealGridSampleResult(keyTile, "#99ccff")
                 letterCount[letter] -= 1;
-
-                anime({
-                    endDelay: 1000,
-                    easing: 'easeInOutQuad',
-                    targets: currTile,
-                    backgroundColor: "#99ccff",
-                    color: "#ffffff",
-                    borderColor: "#99ccff"
-                })
-                
+                revealGridSampleResult(currTile, "#99ccff")
             }
             else{
                 currTile.classList.add("absent");
                 let keyTile = document.getElementById("Key"+letter);
                 keyTile.classList.add("absent");
 
-                anime({
-                    endDelay: 1000,
-                    easing: 'easeInOutQuad',
-                    targets: currTile,
-                    backgroundColor: "#787c7e",
-                    color: "#ffffff",
-                    borderColor: "#787c7e"
-                })
-
-                anime({
-                    endDelay: 1000,
-                    easing: 'easeInOutQuad',
-                    targets: keyTile,
-                    backgroundColor: "#787c7e",
-                    color: "#ffffff",
-                    borderColor: "#787c7e"
-                })
+                revealGridSampleResult(currTile, "#787c7e")
+                revealGridSampleResult(keyTile, "#787c7e")
             }
         }
     }
     
-    livesText = document.getElementById("lives").innerText = "Lives: " + (--lives).toString();
+    livesText = document.getElementById("lives").innerText = "Tries: " + (--lives).toString();
     
-    tries += 1;
+    _tries += 1;
     row += 1;
     col = 0
 }

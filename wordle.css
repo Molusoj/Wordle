@@ -13,10 +13,10 @@ body {
   left: 0;
   top: 40px;
   bottom: 0;
-  font-family: 'Sans-serif', 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS';
+  font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
   text-align: center;
   background: #000000;
-  display: flex;
+  display: block;
   flex-wrap: wrap;
   justify-content:center;
   position: fixed;
@@ -29,27 +29,56 @@ body {
   font-family: "Times New Roman";
 }
 
-#overlay {
-  text-align: center;
+#BG-overlay{
+  opacity: 0;
   position: fixed; /* Sit on top of the page content */
   display: block; /* Hidden by default */
-  height: 5%; /* Full height (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
   width: 100%;
-  left: 0;
-  right: 0;
   top: 0;
-  justify-self: center;
+  margin: 0;
   justify-content: center;
-  background-color: #000000; /* Black background with opacity */
+  background-color: rgba(0, 0, 0, 0.49); /* Black background with opacity */
   z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
   cursor: pointer; /* Add a pointer on hover */
+}
+
+
+#Center-overlay{
+  font-family: "Lato", Sans-serif;
+  opacity: 0;
+  top: 0;
+  position: fixed; /* Sit on top of the page content */
+  display: block; /* Hidden by default */
+  height: fit-content; /* Full height (cover the whole page) */
+  right: 30%;
+  left: 30%;
+  padding: 10px;
+  border-radius: 1.5%;
+  align-content: normal;
+  color: white;
+  text-align: left;
+  background-color: #1a1a1b; /* Black background with opacity */
+  z-index: 3; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
+  box-shadow: 0 0 8px rgb(255, 255, 255);
+}
+
+#scorePoints{
+  font-weight: bolder;
+}
+
+.line{
+  margin: auto;
+  margin-top: 5%;
+  border: 1px ridge rgba(255, 255, 255, 0.7);
 }
 
 #board{
   position: fixed;
   top: 20%;
   width: 100%;
-  height: 370px;
+  height: 356px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: auto auto auto auto auto;
@@ -70,43 +99,200 @@ body {
 
 #keyboardParent{
   bottom: 0;
-  height: fit-content;
+  justify-content: center;
+  display: grid;
+  place-content: center;
+  place-items: center;
+  place-self: center;
   position: fixed;
+  width: 100%
 }
 
-#answer{
-  font-family: "Playfair Display script=latin rev=1";
-  font-weight: bold;
-  color: #000000;
+#Header{
+  text-align: center;
+  position: fixed; 
+  display: inline-block;
+  margin: 10px;
+  padding-bottom: 10px;
+  height: fit-content;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
   justify-self: center;
-  -webkit-text-stroke: 0.5px #000000;
-  height: 50%;
-  top: 20px;
+  background-color: #000000; /* Black background with opacity */
+  z-index: 1; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer;
+  font-family: 'Alfa Slab One', cursive;
+  
+  font-size: 45px;
+  line-height: 100%;
+  letter-spacing: 0.01em;
+  box-shadow: 2px 2px 2px 1px rgba(232, 232, 232, 0.2);
+  pointer-events: none;
+  color: #ffffff;
+}
+
+#Answer{
+  opacity: 0;
+  background-color: aliceblue;
+  display: inline-flex;
+  justify-content: center;
+  place-items: center;
+  place-content: center;
+  width:fit-content;
+  border-radius: 5px;
+  height: 3%;
+  margin-top: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: 'Roboto', Sans-serif;
+}
+
+.sample-tile{
+  /*Box*/
+  border: 2px solid rgb(145, 145, 145);
+  width: 35px;
+  height: 35px;
+  margin: 2.5px;
+
+  /*Text*/
+  color: #ffffff;
+  font-size: 20px;
+  font-family: Sans-serif;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float:left
+}
+
+.close_icon{
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  color: white;
+  cursor: pointer
+}
+
+.top-G-O{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.bottom-G-O{
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 100%;
+}
+
+.container-G-O{
+  grid-template-columns: auto auto auto;
+  justify-content: space-evenly;
   margin: 0;
-  margin-top: 5px;
+  padding-top: 10%;
+  padding-bottom: 10%;
 }
 
 .result{
-  overflow:hidden;
-  width:auto;
-  height: fit-content;
-  display:inline;
+  margin-top: 10px;
+  justify-content: center;
+  display: grid;
+  place-content: center;
+  place-items: center;
+  place-self: center;
+  position: fixed;
+  grid-template-columns: auto auto;
+  width: 100%
+}
+
+#Share{
+  float: right;
+  margin: 0;
+  margin-left: 20px;
+  background-color: #61C3FF;
+  padding: 30px;
+  padding-right: 20px;
+  padding-left: 20px;
+  border-radius: 5px;
+  font-size: larger;
+  font-weight: 700;
+}
+
+#Highest-score, #Completed-wordle {
+  font-size: 50px;
+  margin: auto;
+  text-align: center;
 }
 
 #score{
-  font-family: "Playfair Display script=latin rev=1";
+  font-family: "Lato", Sans-serif;
   font-weight: bold;
   float:right;
   color: white;
-  margin-left:25px;
+  margin-right:40px;
 }
 
 #lives{
-  font-family: "Playfair Display script=latin rev=1";
+  font-family: "Lato", Sans-serif;
   font-weight: bold;
   float:left;
   color: #ffffff;
-  margin-right:25px;
+  margin-left:40px;
+}
+
+#wrapper {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+th,
+td {
+  width: 50%;
+  horiz-align: center;
+}
+
+thead>tr {
+  position: relative;
+  display: block;
+  width: 100%
+}
+
+tbody {
+  display: block;
+  height: 250px;
+  overflow: auto;
+}
+
+#Game-over{
+  font-family: "Lato", Sans-serif;
+  opacity: 0;
+  top: 0;
+  position: fixed; /* Sit on top of the page content */
+  display: block; /* Hidden by default */
+  height: fit-content; /* Full height (cover the whole page) */
+  right: 30%;
+  left: 30%;
+  padding: 10px;
+  border-radius: 1.5%;
+  align-content: normal;
+  color: white;
+  text-align: left;
+  background-color: #1a1a1b; /* Black background with opacity */
+  z-index: 0; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
+}
+
+#Game-over-table{
+  width: 100%;
+  display: block;
+  margin: 0;
+  justify-content: space-between;
 }
 
 .tile{
@@ -141,22 +327,8 @@ body {
   background-color: #d3d6da;
 }
 
-.correct{
-/*  background-color: #6aaa64;
-  color: white;
-  border-color: white;*/
-}
-
-.present{
-/*  background-color: #c9b458;
-  color: white;
-  border-color: white;*/
-}
-
-.absent{
-/*  background-color: #787c7e;
-  color: white;
-  border-color: white;*/
+.sample{
+  display: inline-block;
 }
 
 .enter-key-tile{
@@ -173,6 +345,35 @@ body {
   align-items: center;
   color: white;
   background-color: #797979;
+}
+
+@media (max-width: 700px) {
+  #Center-overlay, #Game-over {
+    right: 5%;
+    left: 5%;
+  }
+  
+  @media (max-width: 400px) {
+    @media (max-height: 860px) {
+      #Center-overlay,#Game-over {
+        font-size: 15px;
+      }
+    }
+    @media (max-height: 750px) {
+      #Center-overlay,#Game-over {
+        font-size: 11px;
+      }
+
+      .sample-tile{
+        /*Box*/
+        border: 2px solid rgb(145, 145, 145);
+        width: 25px;
+        height: 25px;
+        margin: 2.5px;
+        font-size: 15px;
+      }
+    }
+  }
 }
 
 @media (max-width: 450px) and (max-height: 700px){
@@ -197,13 +398,13 @@ body {
     height: 35px;
     font-size: 15px;
   }
-
+  
   #board{
     height: 270px;
   }
 
-  #answer{
-    
+  #Header{
+    font-size: 25px
   }
 
   #score{
@@ -236,10 +437,8 @@ body {
     font-size: 15px;
   }
 
-  #answer{
-    width: 100%;
-    height: 50px;
-    font-size: x-large;
+  #Header{
+    font-size: 30px;
   }
 
   .tile{
@@ -249,7 +448,7 @@ body {
 
   #board{
     width: 100%;
-    height: 400px;
+    height: 355px;
   }
   
   @media (max-width: 395px) {
@@ -287,6 +486,10 @@ body {
       /*Box*/
       width: 40px;
       height: 40px;
+    }
+
+    #Center-overlay, #Game-over {
+      font-size: small;
     }
 
     #board{
@@ -345,5 +548,24 @@ body {
 
   #board{
     height: 500px;
+  }
+}
+
+@media (max-width: 1500px) and (min-height: 1000px)
+{
+  #Center-overlay, #Game-over {
+    right: 5%;
+    left: 5%;
+    font-size: 20px;
+  }
+  
+  .sample-tile{
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+  }
+  
+  .result{
+    margin-top: 30px;
   }
 }

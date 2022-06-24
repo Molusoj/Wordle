@@ -4,23 +4,129 @@
     <title>Wordle Grand Prix</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="wordle.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide|Sofia|Roboto">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
     <script type="text/javascript"
             src="wordle.js" defer>
     </script>
     <script src="anime-master\anime-master\lib\anime.min.js"></script>
+    <script src="html2canvas.js"></script>
     <script src="confetti.js"></script>
+    
     <link rel="icon" href="https://img.icons8.com/color-pixels/32/undefined/experimental-flag-color-pixels.png">
   </head>
   <body id ='body'>
     <div class="result">
       <h2 id="score">Score: 0</h2>
-      <h2 id="lives">Lives: 6</h2>
-    </div>
-    <div id="overlay">
-      <p id="answer">
-        
+      <h2 id="lives">Tries: 6</h2>
+    </div><br/>
+    <div>
+      <p id="Header">
+        Wordle Grand Prix
       </p>
+    </div>
+    <br>
+    <div id="Answer">
+      <p>
+        Word does not exist
+      </p>
+    </div>
+    <div id="Center-overlay">
+      <img class="close_icon" src="https://img.icons8.com/material-outlined/24/FFFFFF/delete-sign.png"/>
+      <p>Guess the <strong>WORDLE</strong> in six tries.<br><br>
+        Each guess has to be a valid 5 letter word. <br>
+        After each guess, the colour of tiles will change to show you how close it is to the word.<br/><br/>
+        When you guess a word, You get 5 extra tries to guess a new word.<br/><br>
+        Play till you run out of tries. </p>
+      <p class="line"></p>
+      <div class="sample">
+        <p>
+          <strong>Example</strong>
+        </p>
+        <p>
+          <span class="sample-tile" id="sample-tile-correct">G</span>
+          <span class="sample-tile">A</span>
+          <span class="sample-tile">M</span>
+          <span class="sample-tile">E</span>
+          <span class="sample-tile">S</span>
+        </p>
+      </div>
+      <p>
+        The letter <strong> G </strong> is in the word and in the correct spot.
+      </p>
+      <div class="sample">
+        <p>
+          <span class="sample-tile">C</span>
+          <span class="sample-tile">R</span>
+          <span class="sample-tile" id="sample-tile-present">I</span>
+          <span class="sample-tile">S</span>
+          <span class="sample-tile">P</span>
+        </p>
+      </div>
+      <p>
+        The letter <strong> I </strong> is in the word but in the wrong spot.
+      </p>
+      <div class="sample">
+        <p>
+          <span class="sample-tile">S</span>
+          <span class="sample-tile">H</span>
+          <span class="sample-tile">O</span>
+          <span class="sample-tile">O</span>
+          <span class="sample-tile" id="sample-tile-absent">T</span>
+        </p>
+      </div>
+      <p>
+        The letter <strong> T </strong> is not in the word in any spot.
+      </p>
+      <p class="line"></p>
+      <p>
+        Players Get Scores based on how many tires it takes to guess the right word.<br>
+      </p>
+      <p id="scorePoints">
+        1st Try - 100 pts <br>
+        2nd Try - 70 pts <br>
+        3rd Try - 50 pts <br>
+        4th Try - 40 pts <br>
+        5th Try - 30 pts <br>
+        6th-nth Try - 10 pts
+      </p>
+    </div>
+    <div id="Game-over">
+      <div id="wrapper">
+        <table>
+          <thead>
+          <tr>
+            <th>WORDLE</th>
+            <th>TRIES</th>
+            <th>SCORE</th>
+          </tr>
+          </thead>
+          <tbody id = "Game-over-table">
+
+          </tbody>
+        </table>
+      </div>
+      <div id style="display: grid" class="container-G-O">
+        <div id = "stat-num" style="float: left;">
+          <p class="top-G-O" id="Completed-wordle">0</p>
+          <p class="bottom-G-O">Completed</p>
+        </div>
+        <div style="float: left">
+          <p class="top-G-O" id="Highest-score">0</p>
+          <p class="bottom-G-O" >Highest Score</p>
+        </div>
+        <div style="float: right">
+          <p id = "Share" @click="share">SHARE</p>
+        </div>
+      </div>
+    </div>
+    <div id="BG-overlay">
     </div>
     <div id="board">
     </div>
