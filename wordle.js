@@ -394,7 +394,7 @@ function answerShake(){
             targets: GameOverBoard,
             easing: 'linear',
             opacity: 1,
-            duration: 1000
+            duration: 5000
         })
     }
 }
