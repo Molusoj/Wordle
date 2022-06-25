@@ -47,7 +47,6 @@ function share() {
                 allowTaint: true,
                 scrollX: 0,scrollY: 0,
                 scrollbars: false,
-                margin: 1,
                 image: {type: 'jpeg', quality: 1},
                 html2canvas: {scale: 2, logging: true},
                 backgroundColor: null,
@@ -423,7 +422,7 @@ function screenShot(){
             targets: GameOverBoard,
             easing: 'linear',
             opacity: 1,
-            translateY: 100,
+            translateY: 180,
             duration: 1000
         })
     }
