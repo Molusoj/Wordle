@@ -1,5 +1,3 @@
-
-
 var height = 6;
 var width = 5;
 
@@ -27,7 +25,6 @@ var highestScoreTxt;
 var GameOverBoard;
 
 function share() {
-
     if(screen.width < 1024) {
         document.getElementById("viewport").setAttribute("content", "width=1200px");
     }
@@ -422,7 +419,6 @@ function screenShot(){
             targets: GameOverBoard,
             easing: 'linear',
             opacity: 1,
-            translateY: "20%",
             duration: 1000
         })
     }
