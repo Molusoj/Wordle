@@ -371,6 +371,11 @@ tbody {
         font-size: 11px;
       }
 
+      @media (max-height: 650px) {
+        #Center-overlay,#Game-over {
+          font-size: 9px;
+        }
+
       .sample-tile{
         /*Box*/
         border: 2px solid rgb(145, 145, 145);
@@ -496,7 +501,7 @@ tbody {
     }
 
     #Center-overlay, #Game-over {
-      font-size: small;
+      font-size: smaller;
     }
 
     #board{
