@@ -24,61 +24,41 @@ var scoreText;
 var highestScoreTxt;
 var GameOverBoard;
 
-function share() {
-    if(screen.width < 1024) {
-        document.getElementById("viewport").setAttribute("content", "width=1200px");
-    }
-    
-    var textToSend = 'Hey fren, check out my score in'
-    
-    GameOverBoard.style.boxShadow = 'none'
-    // iife here
-    ;(async () => {
-        if (!('share' in navigator)) {
-            return
-        }
-        // `element` is the HTML element you want to share.
-        // `backgroundColor` is the desired background color.
-        const canvas = await html2canvas(document.getElementById("Game-over",
+async function shareImage(src) {
+    const response = await fetch(src);
+    const blob = await response.blob();
+    const filesArray = [
+        new File(
+            [blob],
+            'meme.jpg',
             {
-                allowTaint: true,
-                scrollX: 0,scrollY: 0,
-                scrollbars: false,
-                image: {type: 'jpeg', quality: 1},
-                html2canvas: {scale: 2, logging: true},
-                backgroundColor: null,
-                imageTimeout: 15000,
-                useCORS: true
-                
-            })).then(canvas => {
-            canvas.toBlob(async (blob) => {
-                // Even if you want to share just one file you need to
-                // send them as an array of files.
-                const files = [new File([blob], 'image.png', { type: blob.type })]
-                const shareData = {
-                    url: "https://afamuefuna.github.io/Wordle/Index.html",
-                    text: "Click the link below to play",
-                    title: 'Join me in Wordle Grand Prix',
-                    files,
-                }
-                if (navigator.canShare(shareData)) {
-                    try {
-                        await navigator.share(shareData)
-                    } catch (err) {
-                        if (err.name !== 'AbortError') {
-                            console.error(err.name, err.message)
-                        }
-                    }
-                } else {
-                    console.warn('Sharing not supported', shareData)
-                }
+                type: "image/jpeg",
+                lastModified: new Date().getTime()
+            }
+        )
+    ];
+    const shareData = {
+        text: "Play with me",
+        title: "Wordle Grand Prix",
+        url: "https://afamuefuna.github.io/Wordle/Index.html",
+        files: filesArray,
+        
+    };
+    navigator.share(shareData);
+}
+    
 
-                if(screen.width < 1024) {
-                    document.getElementById("viewport").setAttribute("content", "width=device-width, initial-scale=1");
-                }
-            })
+function share() {
+
+    let node = document.getElementById('Game-over');
+
+    domtoimage.toPng(node)
+        .then(function (dataUrl) {
+            let img = new Image();
+            img.src = dataUrl + "";
+            
+            shareImage(img.src)
         });
-    })()
 }
 
 const startConfetti = () => {
@@ -125,7 +105,6 @@ function clearInstruction(center_overlay, BG_overlay){
     canPlay = true;
     center_overlay.style.zIndex = '0'
     BG_overlay.style.zIndex = '0'
-    GameOverBoard.style.zIndex = '0'
 }
 
 var resultDetail = {
@@ -350,10 +329,6 @@ function answerShake(){
             });
         }
     });
-}
-
-function screenShot(){
-    
 }
 
  function processInput(e){

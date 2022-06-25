@@ -276,7 +276,7 @@ tbody {
 }
 
 #Game-over{
-  bottom: 20px;
+  top: 20px;
   font-family: "Lato", Sans-serif;
   opacity: 0;
   position: fixed; /* Sit on top of the page content */
@@ -290,7 +290,7 @@ tbody {
   color: white;
   text-align: left;
   background-color: #1a1a1b; /* Black background with opacity */
-  z-index: 0; /* Specify a stack order in case you're using a different order for other elements */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
   cursor: pointer; /* Add a pointer on hover */
 }
 
