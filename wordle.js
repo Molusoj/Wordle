@@ -27,6 +27,10 @@ var highestScoreTxt;
 var GameOverBoard;
 
 function share() {
+
+    if(screen.width < 1024) {
+        document.getElementById("viewport").setAttribute("content", "width=1200px");
+    }
     
     var textToSend = 'Hey fren, check out my score in'
     
@@ -40,14 +44,16 @@ function share() {
         // `backgroundColor` is the desired background color.
         const canvas = await html2canvas(document.getElementById("Game-over",
             {
-                windowWidth: document.documentElement.offsetWidth,
-                windowHeight: document.documentElement.offsetHeight,
                 allowTaint: true,
                 scrollX: 0,scrollY: 0,
                 scrollbars: false,
                 margin: 1,
                 image: {type: 'jpeg', quality: 1},
                 html2canvas: {scale: 2, logging: true},
+                backgroundColor: null,
+                imageTimeout: 15000,
+                useCORS: true
+                
             })).then(canvas => {
             canvas.toBlob(async (blob) => {
                 // Even if you want to share just one file you need to
@@ -69,6 +75,10 @@ function share() {
                     }
                 } else {
                     console.warn('Sharing not supported', shareData)
+                }
+
+                if(screen.width < 1024) {
+                    document.getElementById("viewport").setAttribute("content", "width=device-width, initial-scale=1");
                 }
             })
         });
