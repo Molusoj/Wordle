@@ -118,9 +118,10 @@ function clearInstruction(center_overlay, BG_overlay){
         }
     })
     canPlay = true;
-    center_overlay.style.zIndex = '0'
-    BG_overlay.style.zIndex = '0'
-    GridBoard.style.zIndex = '1'
+    center_overlay.style.zIndex = '-2'
+    BG_overlay.style.zIndex = '-2'
+    GridBoard.style.zIndex = '-1'
+    answer.style.zIndex = '1'
 }
 
 var resultDetail = {
