@@ -193,6 +193,8 @@ body {
   margin-top: 0;
   margin-bottom: 0;
   line-height: 100%;
+  justify-self: center;
+  text-align: center;
 }
 
 .container-G-O{
