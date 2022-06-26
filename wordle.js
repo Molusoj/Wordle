@@ -402,7 +402,7 @@ function answerShake(){
             targets: GameOverBoard,
             easing: 'linear',
             opacity: 1,
-            duration: 5000
+            duration: 1000
         })
     }
 }

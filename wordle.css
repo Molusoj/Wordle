@@ -276,7 +276,7 @@ tbody {
 }
 
 #Game-over{
-  top: 20px;
+  top: 40%;
   font-family: "Lato", Sans-serif;
   opacity: 0;
   position: fixed; /* Sit on top of the page content */
@@ -368,6 +368,10 @@ tbody {
     @media (max-height: 750px) {
       #Center-overlay, #Game-over {
         font-size: 11px;
+      }
+
+      #Game-over {
+        top: 15%;
       }
 
       @media (max-height: 650px) {
