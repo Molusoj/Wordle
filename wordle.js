@@ -47,6 +47,15 @@ async function shareImage(src) {
     navigator.share(shareData);
 }
     
+function shareText(){
+    const shareData = {
+        text: "Play with me",
+        title: "Wordle Grand Prix",
+        url: "https://afamuefuna.github.io/Wordle/Index.html",
+    };
+    
+    navigator.share(shareData)
+}
 
 function share() {
 
@@ -150,9 +159,8 @@ window.onload = function (){
     document.getElementById('Center-overlay').onclick = function () {
         clearInstruction(center_overlay, BG_overlay)
     }
-
     document.getElementById('Share').onclick = function () {
-        share()
+        shareText()
     }
 }
 
