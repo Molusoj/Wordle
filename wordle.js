@@ -25,6 +25,10 @@ var highestScoreTxt;
 var GameOverBoard;
 var GridBoard
 
+var skyBlueEmoji
+var blueEmoji
+var darkEmoji
+
 async function shareImage(src) {
     const response = await fetch(src);
     const blob = await response.blob();
@@ -50,8 +54,9 @@ async function shareImage(src) {
     
 function shareText(){
     const shareData = {
-        text: "Play with me",
-        title: "Wordle Grand Prix",
+        text: "I Completed " + CompletedWordleTxt + " Wordles and my highest score is " + highestScoreTxt + "\n" +
+            "Click the link and Join me in WORDLE GRAND PRIX",
+        title: "WORDLE GRAND PRIX",
         url: "https://afamuefuna.github.io/Wordle/Index.html",
     };
     
@@ -640,10 +645,10 @@ function update(){
                 
                 let keyTile = document.getElementById("Key"+letter);
                 if(!keyTile.classList.contains("correct")){
+                    revealGridSampleResult(keyTile, "#99ccff")
                 }
-                revealGridSampleResult(keyTile, "#99ccff")
-                letterCount[letter] -= 1;
                 revealGridSampleResult(currTile, "#99ccff")
+                letterCount[letter] -= 1;
             }
             else{
                 currTile.classList.add("absent");
