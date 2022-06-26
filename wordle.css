@@ -113,7 +113,8 @@ body {
   text-align: center;
   position: fixed; 
   display: inline-block;
-  margin: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   padding-bottom: 10px;
   height: fit-content;
   width: 100%;
@@ -129,7 +130,7 @@ body {
   font-size: 45px;
   line-height: 100%;
   letter-spacing: 0.01em;
-  box-shadow: 2px 2px 2px 1px rgba(232, 232, 232, 0.2);
+  border-bottom: 1px solid #d3d6da;
   pointer-events: none;
   color: #ffffff;
 }

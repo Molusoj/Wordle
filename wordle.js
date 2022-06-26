@@ -395,7 +395,7 @@ function answerShake(){
         gameOver = true;
         GameOverBoard.style.zIndex = '2'
 
-        livesText = document.getElementById("lives").innerText = "Lives: " + lives.toString();
+        livesText = document.getElementById("lives").innerText = "Tries: " + lives.toString();
         answer.innerText = word;
         let overlay = document.getElementById('overlay')
         answer.style.opacity = "1";
