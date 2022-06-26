@@ -54,7 +54,7 @@ async function shareImage(src) {
     
 function shareText(){
     const shareData = {
-        text: "I Completed " + CompletedWordleTxt + " Wordles and my highest score is " + highestScoreTxt + "\n" +
+        text: "I Completed " + numOfPlays + " Wordles, \n my highest score is " + highScore + "\n\n" +
             "Click the link and Join me in WORDLE GRAND PRIX",
         title: "WORDLE GRAND PRIX",
         url: "https://afamuefuna.github.io/Wordle/Index.html",

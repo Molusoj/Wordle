@@ -383,6 +383,11 @@ tbody {
 
       #Game-over {
         top: 25%;
+        font-size: 13px;
+      }
+      
+      tbody{
+        height: 200px;
       }
 
       @media (max-height: 650px) {
