@@ -276,7 +276,7 @@ tbody {
 }
 
 #Game-over{
-  top: 40%;
+  top: 25%;
   font-family: "Lato", Sans-serif;
   opacity: 0;
   position: fixed; /* Sit on top of the page content */
@@ -359,10 +359,17 @@ tbody {
     left: 5%;
   }
 
+  #Game-over {
+    top: 25%;
+  }
+
   @media (max-width: 400px) {
     @media (max-height: 860px) {
       #Center-overlay, #Game-over {
         font-size: 15px;
+      }
+      #Game-over {
+        top: 25%;
       }
     }
     @media (max-height: 750px) {
@@ -371,7 +378,7 @@ tbody {
       }
 
       #Game-over {
-        top: 15%;
+        top: 25%;
       }
 
       @media (max-height: 650px) {
@@ -572,7 +579,11 @@ tbody {
   #Center-overlay, #Game-over {
     right: 5%;
     left: 5%;
-    font-size: 20px;
+    font-size: 17px;
+  }
+
+  #Game-over {
+    top: 25%
   }
   
   .sample-tile{
