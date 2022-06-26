@@ -294,7 +294,7 @@ tbody {
   color: white;
   text-align: left;
   background-color: #1a1a1b; /* Black background with opacity */
-  z-index: 0; /* Specify a stack order in case you're using a different order for other elements */
+  z-index: -1; /* Specify a stack order in case you're using a different order for other elements */
 }
 
 #Game-over-table{
