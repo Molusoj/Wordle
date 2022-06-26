@@ -377,22 +377,31 @@ tbody {
       }
     }
     @media (max-height: 750px) {
-      #Center-overlay, #Game-over {
+      #Center-overlay{
         font-size: 11px;
       }
 
       #Game-over {
         top: 25%;
-        font-size: 13px;
+        font-size: 15px;
       }
       
       tbody{
         height: 200px;
       }
 
+      #Highest-score, #Completed-wordle {
+        font-size: 40px;
+        margin: auto;
+        text-align: center;
+      }
+
       @media (max-height: 650px) {
         #Center-overlay, #Game-over {
-          font-size: 9px;
+          font-size: 10px;
+        }
+        #Game-over {
+          font-size: 15px;
         }
 
         .sample-tile {
