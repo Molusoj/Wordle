@@ -225,6 +225,8 @@ body {
   border-radius: 5px;
   font-size: larger;
   font-weight: 700;
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
 }
 
 #Highest-score, #Completed-wordle {
@@ -251,6 +253,7 @@ body {
 
 #wrapper {
   width: 100%;
+  border-bottom: 1px solid white;
 }
 
 table {

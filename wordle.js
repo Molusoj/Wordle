@@ -23,6 +23,7 @@ var livesText;
 var scoreText;
 var highestScoreTxt;
 var GameOverBoard;
+var GridBoard
 
 async function shareImage(src) {
     const response = await fetch(src);
@@ -114,6 +115,7 @@ function clearInstruction(center_overlay, BG_overlay){
     canPlay = true;
     center_overlay.style.zIndex = '0'
     BG_overlay.style.zIndex = '0'
+    GridBoard.style.zIndex = '1'
 }
 
 var resultDetail = {
@@ -128,6 +130,7 @@ window.onload = function (){
     readTextFile("sgb-words.txt")
     initialize();
 
+    GridBoard = document.getElementById('board')
     CompletedWordleTxt = document.getElementById('Completed-wordle');
     highestScoreTxt = document.getElementById('Highest-score')
     GameOverTable = document.getElementById('Game-over-table')
