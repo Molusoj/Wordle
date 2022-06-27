@@ -524,6 +524,7 @@ const clearUsedTiles = () => {
                 complete: function (anim){
                     console.log("done")
                     c.remove();
+                    canPlay = true
                 }
             })
         })
@@ -614,6 +615,9 @@ function update(){
         console.log("correct " + correct)
         
         if(correct == width){
+            
+            canPlay = false;
+            
             answer.style.opacity = '1';
             answer.style.color = "#FFD700";
             answer.innerText = word;
