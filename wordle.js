@@ -71,9 +71,8 @@ async function shareImage(src) {
 }
     
 function shareText(){
-   
     const shareData = {
-        text: playerResultTxt,
+        text: playerResultTxt + "\n \nCompleted: " + numOfPlays + "\nHighest Score: " + highScore,
         title: "Play WORDLE GRAND PRIX with me",
         url: "https://afamuefuna.github.io/Wordle/Index.html",
     };
@@ -623,7 +622,7 @@ function update(){
             answer.innerText = word;
             
             updateScore();
-
+            
             let stats = playerResultStat;
             stats.Score = scorePerGame.toString();
             stats.Tries = _tries;
