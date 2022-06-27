@@ -25,9 +25,26 @@ var highestScoreTxt;
 var GameOverBoard;
 var GridBoard
 
-var skyBlueEmoji
-var blueEmoji
-var darkEmoji
+var playerResultStat = {
+    'Word': "",
+    'Tries': "",
+    'Score': ""
+}
+
+var playerResult = []
+var playerResultTxt = " Check out my result" + String.fromCodePoint(0x1F603) + "\n";
+
+ function arrangeWord(){
+    let sessionResult;
+    
+    console.log(playerResult.length - 1 + " length")
+    for (let i = 0; i <= playerResult.length - 1; i++){
+        sessionResult = " \n" + playerResult[i].Word + " - " + playerResult[i].Tries + " - " + playerResult[i].Score + " ";
+    }
+    playerResultTxt += sessionResult;
+}
+
+
 
 async function shareImage(src) {
     const response = await fetch(src);
@@ -49,31 +66,19 @@ async function shareImage(src) {
         files: filesArray,
         
     };
+    
     navigator.share(shareData);
 }
     
 function shareText(){
+     playerResultTxt += "\n \nCompleted: " + numOfPlays + "\nHighest Score: " + highScore;
     const shareData = {
-        text: "I Completed " + numOfPlays + " Wordles, \n my highest score is " + highScore + "\n\n" +
-            "Click the link and Join me in WORDLE GRAND PRIX",
-        title: "WORDLE GRAND PRIX",
+        text: playerResultTxt,
+        title: "Play WORDLE GRAND PRIX with me",
         url: "https://afamuefuna.github.io/Wordle/Index.html",
     };
     
     navigator.share(shareData)
-}
-
-function share() {
-
-    let node = document.getElementById('Game-over');
-
-    domtoimage.toPng(node)
-        .then(function (dataUrl) {
-            let img = new Image();
-            img.src = dataUrl + "";
-            
-            shareImage(img.src)
-        });
 }
 
 const startConfetti = () => {
@@ -612,8 +617,18 @@ function update(){
             answer.style.opacity = '1';
             answer.style.color = "#FFD700";
             answer.innerText = word;
-
+            
             updateScore();
+
+            let stats = playerResultStat;
+            stats.Score = scorePerGame.toString();
+            stats.Tries = _tries;
+            stats.Word = word
+            console.log(stats.Score + " score")
+            playerResult.push(stats)
+            arrangeWord()
+            console.log(playerResultTxt)
+            
             numOfPlays += 1;
             updateTable()
             CompletedWordleTxt.innerText = numOfPlays;
