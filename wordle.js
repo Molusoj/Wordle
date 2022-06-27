@@ -71,7 +71,7 @@ async function shareImage(src) {
 }
     
 function shareText(){
-     playerResultTxt += "\n \nCompleted: " + numOfPlays + "\nHighest Score: " + highScore;
+   
     const shareData = {
         text: playerResultTxt,
         title: "Play WORDLE GRAND PRIX with me",
