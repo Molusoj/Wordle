@@ -117,6 +117,7 @@ function clearInstruction(center_overlay, BG_overlay){
         easing: 'linear',
         opacity: 0,
         translateY: 0,
+        duration: 100,
         complete:function () {
             BG_overlay.style.opacity = "0"
         }
@@ -157,7 +158,7 @@ window.onload = function (){
         easing: 'linear',
         opacity: 1,
         translateY: 20,
-        duration: 1000,
+        duration: 100,
         complete:function () {
             revealGridSampleResult(sample_wrong, "#787c7e")
             revealGridSampleResult(sample_present, "#99ccff")
@@ -415,7 +416,7 @@ function answerShake(){
             targets: GameOverBoard,
             easing: 'linear',
             opacity: 1,
-            duration: 1000
+            duration: 100
         })
     }
 }
@@ -592,17 +593,44 @@ function update(){
         }
     }
     console.log("Letter count " + letterCount)
+
+    for(let c = 0; c < width; c++){
+        let currTile = document.getElementById(row.toString()+'-'+ c.toString());
+        let letter = currTile.innerText;
+
+        if(!currTile.classList.contains("correct")){
+            if(word.includes(letter) && letterCount[letter] > 0){
+                currTile.classList.add("present");
+
+                let keyTile = document.getElementById("Key"+letter);
+                if(!keyTile.classList.contains("correct")){
+                    revealGridSampleResult(keyTile, "#99ccff")
+                }
+                revealGridSampleResult(currTile, "#99ccff")
+                letterCount[letter] -= 1;
+            }
+            else{
+                currTile.classList.add("absent");
+                let keyTile = document.getElementById("Key"+letter);
+                keyTile.classList.add("absent");
+
+                revealGridSampleResult(currTile, "#787c7e")
+                revealGridSampleResult(keyTile, "#787c7e")
+            }
+        }
+    }
     
     for (let c = 0; c < width; c++){
         let currTile  = document.getElementById(row.toString()+'-'+ (c).toString());
         console.log(col);
         let letter = currTile.innerText;
-        
+
         if(word[c] == letter){
             currTile.classList.add("correct");
-            
+
             let keyTile = document.getElementById("Key" + letter);
             keyTile.classList.remove("present");
+            keyTile.classList.remove("absent");
             keyTile.classList.add("correct");
             correct+=1;
             letterCount[letter] -= 1;
@@ -654,31 +682,6 @@ function update(){
     
     console.log(letterCount);
     console.log("col " + col);
-    for(let c = 0; c < width; c++){
-        let currTile = document.getElementById(row.toString()+'-'+ c.toString());
-        let letter = currTile.innerText;
-        
-        if(!currTile.classList.contains("correct")){
-            if(word.includes(letter) && letterCount[letter] > 0){
-                currTile.classList.add("present");
-                
-                let keyTile = document.getElementById("Key"+letter);
-                if(!keyTile.classList.contains("correct")){
-                    revealGridSampleResult(keyTile, "#99ccff")
-                }
-                revealGridSampleResult(currTile, "#99ccff")
-                letterCount[letter] -= 1;
-            }
-            else{
-                currTile.classList.add("absent");
-                let keyTile = document.getElementById("Key"+letter);
-                keyTile.classList.add("absent");
-
-                revealGridSampleResult(currTile, "#787c7e")
-                revealGridSampleResult(keyTile, "#787c7e")
-            }
-        }
-    }
     
     livesText = document.getElementById("lives").innerText = "Tries: " + (--lives).toString();
     

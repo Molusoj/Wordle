@@ -228,8 +228,7 @@ body {
   border-radius: 5px;
   font-size: larger;
   font-weight: 700;
-  border-bottom: 1px solid white;
-  border-left: 1px solid white;
+  font-family: Sans-serif;
 }
 
 #Highest-score, #Completed-wordle {
@@ -282,6 +281,7 @@ tbody {
 }
 
 #Game-over{
+  box-shadow: 0 0 8px rgb(255, 255, 255);
   top: 25%;
   font-family: "Lato", Sans-serif;
   opacity: 0;
@@ -532,7 +532,7 @@ tbody {
     }
 
     #Center-overlay, #Game-over {
-      font-size: smaller;
+      font-size: 12px;
     }
 
     #board{
