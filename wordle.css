@@ -374,7 +374,7 @@ tbody {
     @media (max-width: 400px) {
         @media (max-height: 860px) {
             #Center-overlay, #Game-over {
-                font-size: 15px;
+                font-size: 14px;
             }
 
             #Game-over {
