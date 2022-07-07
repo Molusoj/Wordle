@@ -466,6 +466,45 @@ tbody {
     #title {
         font-size: large;
     }
+
+    @media (max-height: 550px) {
+        .sample-tile {
+            /*Box*/
+            width: 20px;
+            height: 20px;
+            margin: 2.5px;
+            font-size: 12px;
+        }
+
+        .keyboard-row {
+            width: 390px;
+            margin: 0;
+        }
+
+        .enter-key-tile {
+            width: 52px;
+            height: 47px;
+        }
+
+        .key-tile {
+            width: 32px;
+            height: 47px;
+        }
+
+        .tile {
+            /*Box*/
+            width: 40px;
+            height: 40px;
+        }
+
+        #Center-overlay, #Game-over {
+            font-size: 57%;
+        }
+
+        #board {
+            height: 300px;
+        }
+    }
 }
 
 @media (max-height: 1000px) and (min-height: 700px) {
