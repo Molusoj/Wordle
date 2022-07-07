@@ -467,7 +467,7 @@ tbody {
         font-size: large;
     }
 
-    @media (max-height: 550px) {
+    @media (max-height: 600px) {
         .sample-tile {
             /*Box*/
             width: 20px;
