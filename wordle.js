@@ -138,7 +138,7 @@ var resultDetail = {
 var resultDetailList = [resultDetail]
 
 window.onload = function (){
-    readTextFile("sgb-words.txt")
+    readTextFile("common.txt")
     initialize();
 
     GridBoard = document.getElementById('board')
