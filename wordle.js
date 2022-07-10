@@ -232,7 +232,7 @@ function readTextFile(file)
                 }
                 
                 word = wordList[Math.floor(Math.random() * wordList.length)].toUpperCase();
-
+                //word = ("coobs").toUpperCase();
                 console.log(word)
                 console.log(word.length)
             }
@@ -610,32 +610,6 @@ function update(){
     }
     console.log("Letter count " + letterCount)
 
-    for(let c = 0; c < width; c++){
-        let currTile = document.getElementById(row.toString()+'-'+ c.toString());
-        let letter = currTile.innerText;
-
-        if(!currTile.classList.contains("correct")){
-            if(word.includes(letter) && letterCount[letter] > 0){
-                currTile.classList.add("present");
-
-                let keyTile = document.getElementById("Key"+letter);
-                if(!keyTile.classList.contains("correct")){
-                    revealGridSampleResult(keyTile, "#99ccff")
-                }
-                revealGridSampleResult(currTile, "#99ccff")
-                letterCount[letter] -= 1;
-            }
-            else{
-                currTile.classList.add("absent");
-                let keyTile = document.getElementById("Key"+letter);
-                keyTile.classList.add("absent");
-
-                revealGridSampleResult(currTile, "#787c7e")
-                revealGridSampleResult(keyTile, "#787c7e")
-            }
-        }
-    }
-
     for (let c = 0; c < width; c++){
         let currTile  = document.getElementById(row.toString()+'-'+ (c).toString());
         console.log(col);
@@ -694,6 +668,32 @@ function update(){
             cleanKey();
             clearUsedTiles();
             return;
+        }
+    }
+
+    for(let c = 0; c < width; c++){
+        let currTile = document.getElementById(row.toString()+'-'+ c.toString());
+        let letter = currTile.innerText;
+
+        if(!currTile.classList.contains("correct")){
+            if(word.includes(letter) && letterCount[letter] > 0){
+                currTile.classList.add("present");
+
+                let keyTile = document.getElementById("Key"+letter);
+                if(!keyTile.classList.contains("correct")){
+                    revealGridSampleResult(keyTile, "#99ccff")
+                }
+                revealGridSampleResult(currTile, "#99ccff")
+                letterCount[letter] -= 1;
+            }
+            else{
+                currTile.classList.add("absent");
+                let keyTile = document.getElementById("Key"+letter);
+                keyTile.classList.add("absent");
+
+                revealGridSampleResult(currTile, "#787c7e")
+                revealGridSampleResult(keyTile, "#787c7e")
+            }
         }
     }
 
