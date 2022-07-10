@@ -366,7 +366,7 @@ body {
     #Center-overlay{
         right: 10%;
         left: 10%;
-        font-size: 17px;
+        font-size: 14px;
     }
 
     #Game-over {
@@ -375,12 +375,13 @@ body {
 
     @media (max-width: 400px) {
         @media (max-height: 860px) {
-            #Center-overlay, #Game-over {
-                font-size: 14px;
+            #Center-overlay{
+                font-size: 13px;
             }
 
             #Game-over {
                 top: 25%;
+                font-size: 14px;
             }
         }
         @media (max-height: 750px) {
