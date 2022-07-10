@@ -47,8 +47,6 @@ function arrangeResultShare(){
     playerResultTxt += "\n"
 }
 
-
-
 async function shareImage(src) {
     const response = await fetch(src);
     const blob = await response.blob();
@@ -74,9 +72,9 @@ async function shareImage(src) {
 }
 
 function shareText(){
+    var introTxt = "I guessed " + numOfPlays + "Word(s) in a row!! can you beat my score?" + "\n\n"
     const shareData = {
-        text: playerResultTxt + "\n" + totalScore + " points",
-        title: "I guessed " + numOfPlays + "Word(s) in a row!! can you beat my score?",
+        text: introTxt + playerResultTxt + "\n" + totalScore + " points",
         url: "https://afamuefuna.github.io/Wordle/Index.html",
     };
 
@@ -667,9 +665,11 @@ function update(){
             answer.innerText = word;
             updateScore();
 
-            let stats = playerResultStat;
+            var stats = playerResultStat;
             stats.Score = scorePerGame.toString();
+            stats.Tries = ""
             for (let i = 0; i < _tries; i++){
+                console.log("number of tries " + _tries)
                 stats.Tries += String.fromCodePoint(0x1F48E)
             }
             stats.Word = word
