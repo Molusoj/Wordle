@@ -261,6 +261,8 @@ body {
 
 #wrapper {
     width: 100%;
+    height: 100px;
+    overflow-y: auto;
 }
 
 #flag-GO{
@@ -274,14 +276,15 @@ body {
 }
 
 .container-TS {
-    font-family: "Lato", Sans-serif;
+    font-family: Sans-serif;
     border-top: 1px solid #4f4f4f;
     display: grid;
-    grid-template-columns: auto auto auto;
-    justify-content: space-evenly;
-    margin: 0;
+    grid-template-columns: 40% 20% 35%;
+    text-align: center;
+    margin: auto;
     margin-top: 5%;
-    padding-top: 10%;
+    padding-top: 5%;
+    font-size: 15px;
 }
 
 #Game-over {
@@ -291,7 +294,7 @@ body {
     opacity: 0;
     position: fixed; /* Sit on top of the page content */
     display: block; /* Hidden by default */
-    height: fit-content; /* Full height (cover the whole page) */
+    height: fit-content;
     right: 30%;
     left: 30%;
     padding: 10px;
