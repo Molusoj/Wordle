@@ -18,12 +18,14 @@ var canPlay = false;
 var answer;
 
 var GameOverTable;
-var CompletedWordleTxt;
 var livesText;
 var scoreText;
-var highestScoreTxt;
 var GameOverBoard;
 var GridBoard
+var YourScore
+
+let word;
+let guessList
 
 var playerResultStat = {
     'Word': "",
@@ -32,16 +34,17 @@ var playerResultStat = {
 }
 
 var playerResult = []
-var playerResultTxt = " Check out my result" + String.fromCodePoint(0x1F603) + "\n";
+var playerResultTxt = "";
 
- function arrangeWord(){
+function arrangeResultShare(){
     let sessionResult;
-    
+
     console.log(playerResult.length - 1 + " length")
     for (let i = 0; i <= playerResult.length - 1; i++){
-        sessionResult = " \n" + playerResult[i].Word + " - " + playerResult[i].Tries + " - " + playerResult[i].Score + " ";
+        sessionResult = playerResult[i].Tries  + playerResult[i].Word;
     }
     playerResultTxt += sessionResult;
+    playerResultTxt += "\n"
 }
 
 
@@ -64,19 +67,19 @@ async function shareImage(src) {
         title: "Wordle Grand Prix",
         url: "https://afamuefuna.github.io/Wordle/Index.html",
         files: filesArray,
-        
+
     };
-    
+
     navigator.share(shareData);
 }
-    
+
 function shareText(){
     const shareData = {
-        text: playerResultTxt + "\n \nCompleted: " + numOfPlays + "\nHighest Score: " + highScore,
-        title: "Play WORDLE GRAND PRIX with me",
+        text: playerResultTxt + "\n" + totalScore + " points",
+        title: "I guessed " + numOfPlays + "Word(s) in a row!! can you beat my score?",
         url: "https://afamuefuna.github.io/Wordle/Index.html",
     };
-    
+
     navigator.share(shareData)
 }
 
@@ -87,7 +90,7 @@ const startConfetti = () => {
     }, 200); // 1000 is time that after 1 second start the confetti ( 1000 = 1 sec)
 };
 
-//  for stopping the confetti 
+//  for stopping the confetti
 
 const stopConfetti = () => {
     setTimeout(function() {
@@ -96,7 +99,7 @@ const stopConfetti = () => {
         answer.innerText = " "
         let overlay = document.getElementById('overlay')
         answer.style.opacity = '0'
-        
+
     }, 3000); // 5000 is time that after 5 second stop the confetti ( 5000 = 5 sec)
 };
 
@@ -138,12 +141,12 @@ var resultDetail = {
 var resultDetailList = [resultDetail]
 
 window.onload = function (){
+
     readTextFile("common.txt")
     initialize();
 
+    YourScore = document.getElementById('total-score')
     GridBoard = document.getElementById('board')
-    CompletedWordleTxt = document.getElementById('Completed-wordle');
-    highestScoreTxt = document.getElementById('Highest-score')
     GameOverTable = document.getElementById('Game-over-table')
     GameOverBoard = document.getElementById('Game-over')
     let center_overlay = document.getElementById('Center-overlay');
@@ -152,7 +155,7 @@ window.onload = function (){
     let sample_wrong = document.getElementById('sample-tile-absent')
     let sample_correct = document.getElementById('sample-tile-correct')
     answer = document.getElementById('Answer');
-    
+
     anime({
         targets: center_overlay,
         easing: 'linear',
@@ -179,23 +182,19 @@ window.onload = function (){
 }
 
 function updateTable(){
+    const node = document.getElementsByClassName("container-G-O")[0];
+    var extra;
     for (let i = numOfPlays; i <= resultDetailList.length -1; i++){
-        var newTable = document.createElement('tr')
-        newTable.setAttribute('class', 'row-' + i)
+        const clone = node.cloneNode(true);
 
-        var td = document.createElement('td');
-        var td1 = document.createElement('td');
-        var td2 = document.createElement('td');
-
-        td.textContent = resultDetailList[i].word;
-        td1.textContent = resultDetailList[i].tries;
-        td2.textContent = resultDetailList[i].score;
+        clone.childNodes[1].textContent = resultDetailList[i].word;
+        for (let i = 0; i < _tries; i++){
+            clone.childNodes[3].textContent += String.fromCodePoint(0x1F48E);
+        }
         
-        newTable.appendChild(td);
-        newTable.appendChild(td1);
-        newTable.appendChild(td2);
+        clone.childNodes[5].textContent = resultDetailList[i].score + "pts";
 
-        GameOverTable.appendChild(newTable);
+        document.getElementById("wrapper").appendChild(clone);
     }
 }
 
@@ -212,22 +211,35 @@ function readTextFile(file)
     rawFile.send(null);
     rawFile.onreadystatechange = function ()
     {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status === 0)
-            {
+        if (rawFile.readyState === 4) {
+            if (rawFile.status === 200 || rawFile.status === 0) {
                 var allText = rawFile.responseText;
                 var textByLine = allText.split('\n')
-                
+
                 wordList = textByLine;
                 guessList = textByLine;
-                word = wordList[Math.floor(Math.random()*wordList.length)].toUpperCase();
-                guessList = guessList.concat(wordList);
+                
+                /*for (var i = 0; i < wordList.length; i++){
+                    if(wordList[i].length > 5){
+                        wordList[i] = wordList[i].slice(0, -1);
+                    }
+                }*/
+
+                for (var i = 0; i < guessList.length; i++){
+                    guessList[i].toString();
+                    guessList[i] = guessList[i].toUpperCase();
+                    if(guessList[i].length > 5){
+                       guessList[i] = guessList[i].slice(0, -1);
+                   }
+                }
+                
+                word = wordList[Math.floor(Math.random() * wordList.length)].toUpperCase();
+
                 console.log(word)
+                console.log(word.length)
             }
         }
     }
-
 }
 
 function addMoreTries(){
@@ -242,9 +254,9 @@ function addMoreTries(){
         }
     }
     height = height + 5;
-    livesText = document.getElementById("lives").innerText = "Tries: " + (--lives).toString();
+    livesText = document.getElementById("lives").innerText = String.fromCodePoint(0x1F48E) + ": " + (--lives).toString();
     lives = lives +5;
-    livesText = document.getElementById("lives").innerText = "Tries: " + (lives).toString();
+    livesText = document.getElementById("lives").innerText = String.fromCodePoint(0x1F48E) + ": " + (lives).toString();
 }
 
 let keyboard =
@@ -256,8 +268,8 @@ let keyboard =
 
 function initialize(){
     for (let r = 0; r < height; r++){
-        
-        for (let c = 0; c < width; c++){ 
+
+        for (let c = 0; c < width; c++){
             let tile = document.createElement("span")
             tile.id = r.toString() + "-" + c.toString()
             tile.classList.add("tile")
@@ -265,12 +277,12 @@ function initialize(){
             document.getElementById("board").appendChild(tile)
         }
     }
-    
+
     for (let i = 0; i<keyboard.length; i++){
         let currRow = keyboard[i];
         let keyboardRow = document.createElement("div");
         keyboardRow.classList.add("keyboard-row");
-        
+
         for (let j=0; j < currRow.length; j++){
             let keyTile = document.createElement("div");
             let key = currRow[j];
@@ -283,7 +295,7 @@ function initialize(){
                 keyTile.id = "Key" + key;
             }
             keyTile.addEventListener("click", processKey);
-            
+
             if(key == "Enter"){
                 keyTile.classList.add("enter-key-tile");
             }
@@ -353,12 +365,12 @@ function answerShake(){
     });
 }
 
- function processInput(e){
-     if(!canPlay){
-         return;
-     }
+function processInput(e){
+    if(!canPlay){
+        return;
+    }
     if(gameOver) return;
-    
+
     if("KeyA" <= e.code && e.code <= "KeyZ"){
         console.log("entering texts")
         if(col < width){
@@ -389,7 +401,7 @@ function answerShake(){
             scale: 1,
         })
         currTile.style.borderColor = "#919191FF"
-        
+
         if(answer.innerText == "Word does not exist"){
             answer.innerText = " "
             answer.style.opacity = '0'
@@ -401,16 +413,24 @@ function answerShake(){
         }
 
     }
-    
+
     if(!gameOver && row==height){
         gameOver = true;
         GameOverBoard.style.zIndex = '2'
 
+        const node = document.getElementsByClassName("container-G-O")[0];
+        node.remove()
+
         livesText = document.getElementById("lives").innerText = "Tries: " + lives.toString();
         answer.innerText = word;
         let overlay = document.getElementById('overlay')
-        answer.style.opacity = "1";
-        answer.style.color = "#FFD700"
+        let BG_overlay = document.getElementById('BG-overlay')
+        
+        BG_overlay.style.opacity = "1"
+        BG_overlay.style.zIndex = '1'
+        
+        answer.style.opacity = "10";
+        answer.style.color = "#333399"
 
         anime({
             targets: GameOverBoard,
@@ -428,9 +448,9 @@ function cleanKey(){
         for (let j=0; j < currRow.length; j++){
             let key = currRow[j];
             if(key == "Enter"){
-                
+
             }else if(key == "⌫"){
-                
+
             }else if("A" <= key && key <= "Z"){
                 let keyID = "Key"+key;
                 document.getElementById(keyID).classList.remove("correct");
@@ -455,7 +475,7 @@ function  reverseString(str) {
 
 function updateScore(){
     scoreText = document.getElementById("score");
-    
+
     switch(_tries) {
         case 1:
             scorePerGame = 100;
@@ -483,18 +503,18 @@ function updateScore(){
             scoreText.innerText = "Score: " + totalScore + "pts";
             break;
         case 6:
-            scorePerGame = 30;
+            scorePerGame = 10;
             totalScore = totalScore + 10;
             scoreText.innerText = "Score: " + totalScore + "pts";
-            break;    
+            break;
         default:
-            scorePerGame = 30;
+            scorePerGame = 10;
             totalScore = totalScore + 10;
             scoreText.innerText = "Score: " + totalScore + "pts";
             break;
         // code block
     }
-    
+
     if(scorePerGame > highScore){
         highScore = scorePerGame;
     }
@@ -560,19 +580,20 @@ const clearUsedTiles = () => {
 };
 
 function update(){
-    
+
     console.log("updating")
     let guess = "";
     answer.innerText = "";
-    
+
     for(let c = 0; c < width; c++){
         let currTile = document.getElementById(row.toString() +'-' + (c).toString());
         console.log(currTile.innerText);
         let letter = currTile.innerText;
         guess += letter;
     }
-    guess = guess.toLowerCase();
+    guess = guess.toUpperCase();
     console.log(guess);
+    console.log(word);
 
     if(!guessList.includes(guess)){
         answer.innerText = "Word does not exist"
@@ -581,7 +602,7 @@ function update(){
         answerShake()
         return;
     }
-    
+
     let correct = 0;
     let letterCount = {};
     for (let i = 0; i<word.length; i++){
@@ -619,7 +640,7 @@ function update(){
             }
         }
     }
-    
+
     for (let c = 0; c < width; c++){
         let currTile  = document.getElementById(row.toString()+'-'+ (c).toString());
         console.log(col);
@@ -640,37 +661,36 @@ function update(){
         }
         console.log("width " + width);
         console.log("correct " + correct)
-        
+
         if(correct == width){
-            
             canPlay = false;
-            
+
             answer.style.opacity = '1';
-            answer.style.color = "#FFD700";
+            answer.style.color = "#333399";
             answer.innerText = word;
-            
             updateScore();
-            
+
             let stats = playerResultStat;
             stats.Score = scorePerGame.toString();
-            stats.Tries = _tries;
+            for (let i = 0; i < _tries; i++){
+                stats.Tries += String.fromCodePoint(0x1F48E)
+            }
             stats.Word = word
             console.log(stats.Score + " score")
             playerResult.push(stats)
-            arrangeWord()
+            arrangeResultShare()
             console.log(playerResultTxt)
-            
+
             numOfPlays += 1;
             updateTable()
-            CompletedWordleTxt.innerText = numOfPlays;
-            highestScoreTxt.innerText = highScore;
+            YourScore.innerText = totalScore + "pts";
 
             console.log("Score: " + totalScore)
-            
+
             startConfetti()
             stopConfetti()
             addMoreTries();
-            readTextFile("sgb-words.txt")
+            readTextFile("common.txt")
             col = 0
             row += 1;
             _tries = 1;
@@ -679,12 +699,12 @@ function update(){
             return;
         }
     }
-    
+
     console.log(letterCount);
     console.log("col " + col);
-    
-    livesText = document.getElementById("lives").innerText = "Tries: " + (--lives).toString();
-    
+
+    livesText = document.getElementById("lives").innerText = String.fromCodePoint(0x1F48E) + ": " + (--lives).toString();
+
     _tries += 1;
     row += 1;
     col = 0

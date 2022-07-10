@@ -200,11 +200,13 @@ body {
 }
 
 .container-G-O {
-    grid-template-columns: auto auto auto;
+    display: grid;
+    grid-template-columns: 20% 50% 20%;
     justify-content: space-evenly;
     margin: 0;
-    padding-top: 10%;
-    padding-bottom: 10%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    font-size: 150%;
 }
 
 .result {
@@ -223,8 +225,8 @@ body {
     float: right;
     margin: 0;
     margin-left: 20px;
-    background-color: #61C3FF;
-    padding: 30px;
+    background-color: #333399;
+    padding: 10px;
     padding-right: 20px;
     padding-left: 20px;
     border-radius: 5px;
@@ -233,10 +235,12 @@ body {
     font-family: Sans-serif;
 }
 
-#Highest-score, #Completed-wordle {
-    font-size: 50px;
+#your-score, #total-score {
+    font-size: 20px;
     margin: auto;
+    margin-top: 10px;
     text-align: center;
+    font-weight: bolder;
 }
 
 #score {
@@ -244,7 +248,7 @@ body {
     font-weight: bold;
     float: right;
     color: white;
-    margin-right: 40px;
+    margin-left: 40px;
 }
 
 #lives {
@@ -252,40 +256,38 @@ body {
     font-weight: bold;
     float: left;
     color: #ffffff;
-    margin-left: 40px;
+    margin-right: 40px;
 }
 
 #wrapper {
     width: 100%;
-    border-bottom: 1px solid white;
 }
 
-table {
-    width: 100%;
+#flag-GO{
+    border-bottom: 1px solid #4f4f4f;
+    margin: 5px;
+    text-align: center;
+    font-size: 200%;
+    justify-self: center;
+    margin-bottom: 5%;
+    padding-bottom: 10px;
 }
 
-th,
-td {
-    width: 50%;
-    horiz-align: center;
-}
-
-thead > tr {
-    position: relative;
-    display: block;
-    width: 100%
-}
-
-tbody {
-    display: block;
-    height: 250px;
-    overflow: auto;
+.container-TS {
+    font-family: "Lato", Sans-serif;
+    border-top: 1px solid #4f4f4f;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: space-evenly;
+    margin: 0;
+    margin-top: 5%;
+    padding-top: 10%;
 }
 
 #Game-over {
     box-shadow: 0 0 8px rgb(255, 255, 255);
     top: 25%;
-    font-family: "Lato", Sans-serif;
+    font-family: Sans-serif;
     opacity: 0;
     position: fixed; /* Sit on top of the page content */
     display: block; /* Hidden by default */
@@ -293,19 +295,13 @@ tbody {
     right: 30%;
     left: 30%;
     padding: 10px;
+    padding-top: 0;
     border-radius: 1.5%;
     align-content: normal;
     color: white;
     text-align: left;
     background-color: #1a1a1b; /* Black background with opacity */
-    z-index: -1; /* Specify a stack order in case you're using a different order for other elements */
-}
-
-#Game-over-table {
-    width: 100%;
-    display: block;
-    margin: 0;
-    justify-content: space-between;
+    z-index: -1;
 }
 
 .tile {
@@ -362,9 +358,15 @@ tbody {
 }
 
 @media (max-width: 700px) {
-    #Center-overlay, #Game-over {
+    #Game-over {
         right: 5%;
         left: 5%;
+    }
+
+    #Center-overlay{
+        right: 10%;
+        left: 10%;
+        font-size: 17px;
     }
 
     #Game-over {
@@ -531,7 +533,6 @@ tbody {
     .tile {
         width: 65px;
         height: 65px;
-        margin: 2px;
     }
 
     #board {
@@ -548,12 +549,12 @@ tbody {
         .tile {
             width: 60px;
             height: 60px;
-            margin: 2px;
+            margin: 2.5px;
         }
 
         #board {
             width: 100%;
-            height: 410px;
+            height: 415px;
         }
     }
 
@@ -657,9 +658,15 @@ tbody {
 }
 
 @media (max-width: 1500px) and (min-height: 1000px) {
-    #Center-overlay, #Game-over {
-        right: 5%;
-        left: 5%;
+    #Game-over {
+        right: 20%;
+        left: 20%;
+        font-size: 17px;
+    }
+
+    #Center-overlay{
+        right: 10%;
+        left: 10%;
         font-size: 17px;
     }
 
