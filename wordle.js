@@ -425,10 +425,7 @@ function processInput(e){
         answer.innerText = word;
         let overlay = document.getElementById('overlay')
         let BG_overlay = document.getElementById('BG-overlay')
-        
-        BG_overlay.style.opacity = "1"
-        BG_overlay.style.zIndex = '1'
-        
+                
         answer.style.opacity = "10";
         answer.style.color = "#333399"
 
