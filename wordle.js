@@ -400,7 +400,7 @@ function processInput(e){
         })
         currTile.style.borderColor = "#919191FF"
 
-        if(answer.innerText == "Word does not exist"){
+        if(answer.innerText == "Word is not on the list"){
             answer.innerText = " "
             answer.style.opacity = '0'
         }
@@ -591,7 +591,7 @@ function update(){
     console.log(word);
 
     if(!guessList.includes(guess)){
-        answer.innerText = "Word does not exist"
+        answer.innerText = "Word is not on the list"
         answer.style.opacity = "1";
         answer.style.color = "#000000"
         answerShake()
