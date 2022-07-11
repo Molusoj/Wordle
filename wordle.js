@@ -140,7 +140,7 @@ var resultDetailList = [resultDetail]
 
 window.onload = function (){
 
-    readTextFile("common.txt")
+    readTextFile("scrabbable")
     initialize();
 
     YourScore = document.getElementById('total-score')
@@ -212,7 +212,7 @@ function readTextFile(file)
         if (rawFile.readyState === 4) {
             if (rawFile.status === 200 || rawFile.status === 0) {
                 var allText = rawFile.responseText;
-                var textByLine = allText.split('\n')
+                var textByLine = allText.split(' ')
 
                 wordList = textByLine;
                 guessList = textByLine;
@@ -661,7 +661,7 @@ function update(){
             startConfetti()
             stopConfetti()
             addMoreTries();
-            readTextFile("common.txt")
+            readTextFile("scrabbable")
             col = 0
             row += 1;
             _tries = 1;
