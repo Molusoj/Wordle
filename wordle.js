@@ -419,7 +419,7 @@ function processInput(e){
         const node = document.getElementsByClassName("container-G-O")[0];
         node.remove()
 
-        livesText = document.getElementById("lives").innerText = "Tries: " + lives.toString();
+        livesText = document.getElementById("lives").innerText = String.fromCodePoint(0x1F48E) + ": " + (lives).toString();
         answer.innerText = word;
         let overlay = document.getElementById('overlay')
         let BG_overlay = document.getElementById('BG-overlay')
