@@ -1,8 +1,7 @@
 {
   "name": "wordle",
   "version": "1.0.0",
-  "description": "",
-  "main": "confetti.js",
+  "description": "Wordle game",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,13 +9,23 @@
     "type": "git",
     "url": "git+https://github.com/Afamuefuna/Wordle.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Gems game",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Afamuefuna/Wordle/issues"
   },
   "homepage": "https://github.com/Afamuefuna/Wordle#readme",
   "dependencies": {
-    "dom-to-image": "^2.6.0"
-  }
+    "body-parser": "^1.20.0",
+    "dom-to-image": "^2.6.0",
+    "emailjs": "^4.0.0",
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6",
+    "nodemailer": "^6.7.7",
+    "postmark": "^3.0.12"
+  },
+  "keywords": [
+    "Wordle"
+  ],
+  "main": "app.js"
 }

@@ -14,6 +14,7 @@ var numOfPlays = 0;
 var highScore = 0;
 
 var canPlay = false;
+var feedbackDisplayed = false;
 
 var answer;
 
@@ -35,6 +36,7 @@ var playerResultStat = {
 
 var playerResult = []
 var playerResultTxt = "";
+let BG_overlay;
 
 function arrangeResultShare(){
     let sessionResult;
@@ -65,7 +67,6 @@ async function shareImage(src) {
         title: "Wordle Grand Prix",
         url: "https://afamuefuna.github.io/Wordle/Index.html",
         files: filesArray,
-
     };
 
     navigator.share(shareData);
@@ -85,11 +86,10 @@ const startConfetti = () => {
     setTimeout(function() {
         confetti.start()
         confetti.speed = 10;
-    }, 200); // 1000 is time that after 1 second start the confetti ( 1000 = 1 sec)
+    }, 200);
 };
 
 //  for stopping the confetti
-
 const stopConfetti = () => {
     setTimeout(function() {
         confetti.stop()
@@ -130,6 +130,41 @@ function clearInstruction(center_overlay, BG_overlay){
     answer.style.zIndex = '1'
 }
 
+function feedbackDisplay(display){
+    if(display == true){
+        feedbackDisplayed = true;
+        const feedbackContainer = document.getElementById("feedback-container")
+
+        anime({
+            targets: feedbackContainer,
+            easing: 'linear',
+            opacity: 1,
+            translateY: 1,
+            duration: 100,
+            scale: 1,
+            complete:function () {
+                feedbackContainer.style.zIndex = '2'
+            }
+        })   
+    }else{
+        feedbackDisplayed = false;
+        canPlay = true;
+        const feedbackContainer = document.getElementById("feedback-container")
+
+        anime({
+            targets: feedbackContainer,
+            easing: 'linear',
+            opacity: 0,
+            scale: 0,
+            translateY: 0,
+            duration: 100,
+            complete:function () {
+                feedbackContainer.style.zIndex = '0'
+            }
+        })
+    }
+}
+
 var resultDetail = {
     'word':"",
     'score':"",
@@ -148,7 +183,7 @@ window.onload = function (){
     GameOverTable = document.getElementById('Game-over-table')
     GameOverBoard = document.getElementById('Game-over')
     let center_overlay = document.getElementById('Center-overlay');
-    let BG_overlay = document.getElementById('BG-overlay');
+    BG_overlay = document.getElementById('BG-overlay');
     let sample_present = document.getElementById('sample-tile-present')
     let sample_wrong = document.getElementById('sample-tile-absent')
     let sample_correct = document.getElementById('sample-tile-correct')
@@ -171,6 +206,15 @@ window.onload = function (){
     document.getElementById('BG-overlay').onclick = function() {
         clearInstruction(center_overlay, BG_overlay)
     }
+    
+    document.getElementById('feedback-link').onclick = function (){
+        feedbackDisplay(true)
+    }
+
+    document.getElementById('feedback_close_icon').onclick = function (){
+        feedbackDisplay(false)
+    }
+    
     document.getElementById('Center-overlay').onclick = function () {
         clearInstruction(center_overlay, BG_overlay)
     }
@@ -217,12 +261,6 @@ function readTextFile(file)
                 wordList = textByLine;
                 guessList = textByLine;
                 
-                /*for (var i = 0; i < wordList.length; i++){
-                    if(wordList[i].length > 5){
-                        wordList[i] = wordList[i].slice(0, -1);
-                    }
-                }*/
-
                 for (var i = 0; i < guessList.length; i++){
                     guessList[i].toString();
                     guessList[i] = guessList[i].toUpperCase();
@@ -232,7 +270,6 @@ function readTextFile(file)
                 }
                 
                 word = wordList[Math.floor(Math.random() * wordList.length)].toUpperCase();
-                //word = ("coobs").toUpperCase();
                 console.log(word)
                 console.log(word.length)
             }
@@ -367,6 +404,10 @@ function processInput(e){
     if(!canPlay){
         return;
     }
+    if(feedbackDisplayed){
+        return;
+    }
+    
     if(gameOver) return;
 
     if("KeyA" <= e.code && e.code <= "KeyZ"){
@@ -687,12 +728,14 @@ function update(){
                 letterCount[letter] -= 1;
             }
             else{
-                currTile.classList.add("absent");
-                let keyTile = document.getElementById("Key"+letter);
-                keyTile.classList.add("absent");
+                if(!currTile.classList.contains("present")){
+                    currTile.classList.add("absent");
+                    let keyTile = document.getElementById("Key"+letter);
+                    keyTile.classList.add("absent");
 
-                revealGridSampleResult(currTile, "#787c7e")
-                revealGridSampleResult(keyTile, "#787c7e")
+                    revealGridSampleResult(currTile, "#787c7e")
+                    revealGridSampleResult(keyTile, "#787c7e")
+                }
             }
         }
     }

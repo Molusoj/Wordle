@@ -1,132 +1,159 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/html">
 <head>
-  <title>Wordle Grand Prix</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
-  <link rel="stylesheet" href="wordle.css">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-  </style>
-  <script type="text/javascript"
-          src="wordle.js">
-  </script>
-  <script src="anime-master\anime-master\lib\anime.min.js"></script>
-  <script src="html2canvas.js"></script>
-  <script src="confetti.js"></script>
-  <script src="dom-to-image.js"></script>
-  <link rel="icon" href="https://img.icons8.com/color-pixels/32/undefined/experimental-flag-color-pixels.png">
+    <title>Wordle Grand Prix</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+    <link rel="stylesheet" href="wordle.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+    </style>
+    <script type="text/javascript"
+            src="wordle.js">
+    </script>
+    <script src="anime-master\anime-master\lib\anime.min.js"></script>
+    <script src="html2canvas.js"></script>
+    <script src="confetti.js"></script>
+    <script src="dom-to-image.js"></script>
+    <script src="node_modules/emailjs/smtp/client.ts"></script>
+    <link rel="icon" href="https://img.icons8.com/color-pixels/32/undefined/experimental-flag-color-pixels.png">
 </head>
 <body id='body'>
 <div class="result">
-  <h2 id="lives">&#128142: 6</h2>
-  <h2 id="score">Score: 0</h2>
+    <h2 id="lives">&#128142: 6</h2>
+    <h2 id="score">Score: 0</h2>
 </div>
 <br/>
 <div>
-  <p id="Header">
-    &#127937
-    WORDLE GRAND PRIX
-    &#127937
-  </p>
+    <p id="Header">
+        &#127937
+        WORDLE GRAND PRIX
+        &#127937
+    </p>
 </div>
 <br>
 <div id="Answer">
-  <p id="AnswerTxt">
-    Word does not exist
-  </p>
+    <p id="AnswerTxt">
+        Word does not exist
+    </p>
 </div>
 <div id="Center-overlay">
-  <img class="close_icon" src="https://img.icons8.com/material-outlined/24/FFFFFF/delete-sign.png"/>
-  <p>Guess the <strong>WORDLE</strong> in six tries.<br><br>
-    Each guess has to be a valid 5 letter word. <br><br>
-    After each guess, the colour of tiles will change to show you how close it is to the word.<br/><br/>
-    When you guess a word, You get 5 extra tries to guess a new word.<br/><br>
-    Play till you run out of tries. </p>
-  <p class="line"></p>
-  <p>
-    Scores are based on how many tries it takes to guess the word.<br>
-  </p>
-  <p id="scorePoints">
-    1st Try - 100 pts <br>
-    2nd Try - 70 pts <br>
-    3rd Try - 50 pts <br>
-    4th Try - 40 pts <br>
-    5th Try - 30 pts <br>
-    Above 6 Tries - 10 pts
-  </p>
-  <p class="line"></p>
-  <div class="sample">
+    <img class="close_icon" src="https://img.icons8.com/material-outlined/24/FFFFFF/delete-sign.png"/>
+    <p>Guess the <strong>WORDLE</strong> in six tries.<br><br>
+        Each guess has to be a valid 5 letter word. <br><br>
+        After each guess, the colour of tiles will change to show you how close it is to the word.<br/><br/>
+        When you guess a word, You get 5 extra tries to guess a new word.<br/><br>
+        Play till you run out of tries. </p>
+    <p class="line"></p>
     <p>
-      <strong>Example</strong>
+        Scores are based on how many tries it takes to guess the word.<br>
     </p>
+    <p id="scorePoints">
+        1st Try - 100 pts <br>
+        2nd Try - 70 pts <br>
+        3rd Try - 50 pts <br>
+        4th Try - 40 pts <br>
+        5th Try - 30 pts <br>
+        Above 6 Tries - 10 pts
+    </p>
+    <p class="line"></p>
+    <div class="sample">
+        <p>
+            <strong>Example</strong>
+        </p>
+        <p>
+            <span class="sample-tile" id="sample-tile-correct">G</span>
+            <span class="sample-tile">A</span>
+            <span class="sample-tile">M</span>
+            <span class="sample-tile">E</span>
+            <span class="sample-tile">S</span>
+        </p>
+    </div>
     <p>
-      <span class="sample-tile" id="sample-tile-correct">G</span>
-      <span class="sample-tile">A</span>
-      <span class="sample-tile">M</span>
-      <span class="sample-tile">E</span>
-      <span class="sample-tile">S</span>
+        The letter <strong> G </strong> is in the word and in the correct spot.
     </p>
-  </div>
-  <p>
-    The letter <strong> G </strong> is in the word and in the correct spot.
-  </p>
-  <div class="sample">
+    <div class="sample">
+        <p>
+            <span class="sample-tile">C</span>
+            <span class="sample-tile">R</span>
+            <span class="sample-tile" id="sample-tile-present">I</span>
+            <span class="sample-tile">S</span>
+            <span class="sample-tile">P</span>
+        </p>
+    </div>
     <p>
-      <span class="sample-tile">C</span>
-      <span class="sample-tile">R</span>
-      <span class="sample-tile" id="sample-tile-present">I</span>
-      <span class="sample-tile">S</span>
-      <span class="sample-tile">P</span>
+        The letter <strong> I </strong> is in the word but in the wrong spot.
     </p>
-  </div>
-  <p>
-    The letter <strong> I </strong> is in the word but in the wrong spot.
-  </p>
-  <div class="sample">
+    <div class="sample">
+        <p>
+            <span class="sample-tile">S</span>
+            <span class="sample-tile">H</span>
+            <span class="sample-tile">O</span>
+            <span class="sample-tile">O</span>
+            <span class="sample-tile" id="sample-tile-absent">T</span>
+        </p>
+    </div>
     <p>
-      <span class="sample-tile">S</span>
-      <span class="sample-tile">H</span>
-      <span class="sample-tile">O</span>
-      <span class="sample-tile">O</span>
-      <span class="sample-tile" id="sample-tile-absent">T</span>
+        The letter <strong> T </strong> is not in the word in any spot.
     </p>
-  </div>
-  <p>
-    The letter <strong> T </strong> is not in the word in any spot.
-  </p>
 </div>
 <div id="Game-over">
-  <p id="flag-GO">
-    &#127937
-    &#127937
-  </p>
-  <div id="wrapper">
-    <div class="container-G-O">
-      <p class="bottom-G-O" style="float: left;" id = "_Word"></p>
-      <p class="bottom-G-O" style="float: left;" id = "_Tries"></p>
-      <p class="bottom-G-O" style="float: right;" id = "_Score"></p>
+    <p id="flag-GO">
+        &#127937
+        &#127937
+    </p>
+    <div id="wrapper">
+        <div class="container-G-O">
+            <p class="bottom-G-O" style="float: left;" id="_Word"></p>
+            <p class="bottom-G-O" style="float: left;" id="_Tries"></p>
+            <p class="bottom-G-O" style="float: right;" id="_Score"></p>
+        </div>
     </div>
-  </div>
-  <div style="display: grid" class="container-TS">
-    <div id="stat-num" style="float: left;">
-      <p id="your-score">YOUR SCORE</p>
+    <div style="display: grid" class="container-TS">
+        <div id="stat-num" style="float: left;">
+            <p id="your-score">YOUR SCORE</p>
+        </div>
+        <div style="float: left">
+            <p id="total-score">0pts</p>
+        </div>
+        <div id="Share-container" style="float: right">
+            <p id="Share">SHARE</p>
+        </div>
     </div>
-    <div style="float: left">
-      <p id="total-score">0pts</p>
-    </div>
-    <div id="Share-container" style="float: right">
-      <p id="Share">SHARE</p>
-    </div>
-  </div>
 </div>
 <div id="BG-overlay">
 </div>
 <div id="board">
 </div>
 <div id="keyboardParent">
+</div>
+<p id="Collect-feedback">
+    &#128075 What do you think about our game?
+    <u id="feedback-link">Let us know</u>
+</p>
+<div id="feedback-container">
+    <div class="row">
+        <img id="feedback_close_icon" src="https://img.icons8.com/material-outlined/24/000000/delete-sign.png"/>
+        <div class="col-25">
+            <label for="email">Email Address</label>
+        </div>
+        <div class="col-75">
+            <input type="email" id="email" name="email-address" placeholder="Your email address..">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+            <label for="subject">Feedback</label>
+        </div>
+        <div class="col-75">
+            <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+        </div>
+    </div>
+    <div class="row" id="submit">
+        <input type="submit" value="Submit">
+    </div>
 </div>
 </body>
 </html>
